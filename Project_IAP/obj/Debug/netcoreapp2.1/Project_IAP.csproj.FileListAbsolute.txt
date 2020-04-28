@@ -6,8 +6,6 @@ D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimec
 D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimeconfig.dev.json
 D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.dll
 D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.pdb
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csprojAssemblyReference.cache
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csproj.CoreCompileInputs.cache
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cache
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cs
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.AssemblyInfoInputs.cache
@@ -16,3 +14,4 @@ D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorTar
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.dll
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.pdb
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.genruntimeconfig.cache
+D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csproj.CoreCompileInputs.cache

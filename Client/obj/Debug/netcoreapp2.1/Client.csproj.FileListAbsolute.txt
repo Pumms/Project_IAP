@@ -28,10 +28,10 @@ D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.genruntimeconfig.c
 D:\VisualBC\Project_IAP\Client\bin\Debug\netcoreapp2.1\Client.pdb
 D:\VisualBC\Project_IAP\Client\bin\Debug\netcoreapp2.1\Client.Views.dll
 D:\VisualBC\Project_IAP\Client\bin\Debug\netcoreapp2.1\Client.Views.pdb
-D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.csprojAssemblyReference.cache
 D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.csproj.CoreCompileInputs.cache
 D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.Views.pdb
 D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.dll
 D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.pdb
 D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.csproj.CopyComplete
 D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Razor\Views\Layouts\Layout.cshtml.g.cs
+D:\VisualBC\Project_IAP\Client\obj\Debug\netcoreapp2.1\Client.csprojAssemblyReference.cache
