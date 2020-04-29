@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VisualBC\\Project_IAP\\Client\\Client.csproj": {}
+    "D:\\Tugas Akhir\\Project_IAP\\Client\\Client.csproj": {}
   },
   "projects": {
-    "D:\\VisualBC\\Project_IAP\\Client\\Client.csproj": {
+    "D:\\Tugas Akhir\\Project_IAP\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VisualBC\\Project_IAP\\Client\\Client.csproj",
+        "projectUniqueName": "D:\\Tugas Akhir\\Project_IAP\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "D:\\VisualBC\\Project_IAP\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\Pikri\\.nuget\\packages\\",
-        "outputPath": "D:\\VisualBC\\Project_IAP\\Client\\obj\\",
+        "projectPath": "D:\\Tugas Akhir\\Project_IAP\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\Pummels\\.nuget\\packages\\",
+        "outputPath": "D:\\Tugas Akhir\\Project_IAP\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Pikri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pummels\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,7 +47,7 @@
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.2, )"
+              "version": "[2.2.0, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
