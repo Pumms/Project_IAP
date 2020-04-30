@@ -29,11 +29,11 @@ namespace Project_IAP.Controllers
         }
 
         [HttpPost]
-        [Route("ApplyInterview")]
-        public async Task<ActionResult<EmpInterview>> ApplyInterview(int EmpId, int IntvId)
+        [Route("Apply")]
+        public async Task<ActionResult<Contract>> ApplyInterview(Contract contract)
         {
-            var insert = await _interviewRepository.ApplyInterview(EmpId, IntvId);
-            return Ok(new { data = insert });
+            var insert = await _interviewRepository.ApplyInterview(contract);
+            return Ok("Apply Success");
         }
     }
 }

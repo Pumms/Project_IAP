@@ -15,6 +15,5 @@ namespace Project_IAP.Models
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public IList<UserRole> UserRoles { get; set; }
     }
 }

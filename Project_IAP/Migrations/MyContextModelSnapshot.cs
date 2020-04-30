@@ -19,6 +19,40 @@ namespace Project_IAP.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Project_IAP.Models.BCEmployee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BootCampId");
+
+                    b.Property<int>("EmployeeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BootCampId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("TB_T_BCEmployee");
+                });
+
+            modelBuilder.Entity("Project_IAP.Models.BootCamp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Batch");
+
+                    b.Property<string>("Class");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TB_M_BootCamp");
+                });
+
             modelBuilder.Entity("Project_IAP.Models.Company", b =>
                 {
                     b.Property<int>("Id")
@@ -38,21 +72,33 @@ namespace Project_IAP.Migrations
                     b.ToTable("TB_M_Company");
                 });
 
-            modelBuilder.Entity("Project_IAP.Models.EmpInterview", b =>
+            modelBuilder.Entity("Project_IAP.Models.Contract", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool?>("ConfirmationCompany");
+
+                    b.Property<bool?>("ConfirmationEmp");
+
                     b.Property<int>("EmployeeId");
+
+                    b.Property<DateTime?>("EndContract");
 
                     b.Property<int>("InterviewId");
 
-                    b.Property<bool>("ConfirmationCompany");
+                    b.Property<DateTime?>("StartContract");
 
-                    b.Property<bool>("ConfirmationEmp");
+                    b.Property<bool?>("Status");
 
-                    b.HasKey("EmployeeId", "InterviewId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("InterviewId");
 
-                    b.ToTable("TB_T_EmpInterview");
+                    b.ToTable("TB_T_Contract");
                 });
 
             modelBuilder.Entity("Project_IAP.Models.Employee", b =>
@@ -68,8 +114,6 @@ namespace Project_IAP.Migrations
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
-
-                    b.Property<int>("NIK");
 
                     b.Property<string>("PhoneNumber");
 
@@ -92,9 +136,15 @@ namespace Project_IAP.Migrations
 
                     b.Property<int>("CompanyId");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("DescriptionAddress");
 
                     b.Property<string>("Division");
+
+                    b.Property<string>("Education");
+
+                    b.Property<string>("Experience");
+
+                    b.Property<string>("Gender");
 
                     b.Property<DateTime>("InterviewDate");
 
@@ -160,28 +210,45 @@ namespace Project_IAP.Migrations
 
             modelBuilder.Entity("Project_IAP.Models.UserRole", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("RoleId");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.Property<int>("UserId");
 
-                    b.HasAlternateKey("UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TB_T_UserRole");
                 });
 
-            modelBuilder.Entity("Project_IAP.Models.EmpInterview", b =>
+            modelBuilder.Entity("Project_IAP.Models.BCEmployee", b =>
+                {
+                    b.HasOne("Project_IAP.Models.BootCamp", "BootCamp")
+                        .WithMany()
+                        .HasForeignKey("BootCampId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Project_IAP.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Project_IAP.Models.Contract", b =>
                 {
                     b.HasOne("Project_IAP.Models.Employee", "Employee")
-                        .WithMany("EmpInterviews")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Project_IAP.Models.Interview", "Interview")
-                        .WithMany("EmpInterviews")
+                        .WithMany()
                         .HasForeignKey("InterviewId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -205,12 +272,12 @@ namespace Project_IAP.Migrations
             modelBuilder.Entity("Project_IAP.Models.UserRole", b =>
                 {
                     b.HasOne("Project_IAP.Models.Role", "Role")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Project_IAP.Models.User", "User")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace Project_IAP.Models
 {
-    [Table("TB_M_Role")]
-    public class Role : IEntity
+    [Table("TB_M_BootCamp")]
+    public class BootCamp : IEntity
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Batch { get; set; }
+        public string Class { get; set; }
     }
 }

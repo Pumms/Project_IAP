@@ -13,7 +13,6 @@ namespace Project_IAP.Models
     {
         [Key]
         public int Id { get; set; }
-        public int NIK { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -21,6 +20,5 @@ namespace Project_IAP.Models
         public string Religion { get; set; }
         public string PhoneNumber { get; set; }
         public bool WorkStatus { get; set; }
-        public IList<EmpInterview> EmpInterviews { get; set; }
     }
 }

@@ -9,6 +9,20 @@ namespace Project_IAP.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "TB_M_BootCamp",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Batch = table.Column<string>(nullable: true),
+                    Class = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_M_BootCamp", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TB_M_Company",
                 columns: table => new
                 {
@@ -30,7 +44,6 @@ namespace Project_IAP.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NIK = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
@@ -83,7 +96,10 @@ namespace Project_IAP.Migrations
                     JobDesk = table.Column<string>(nullable: true),
                     InterviewDate = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Gender = table.Column<string>(nullable: true),
+                    Experience = table.Column<string>(nullable: true),
+                    Education = table.Column<string>(nullable: true),
+                    DescriptionAddress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,6 +108,32 @@ namespace Project_IAP.Migrations
                         name: "FK_TB_T_Interview_TB_M_Company_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "TB_M_Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_T_BCEmployee",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EmployeeId = table.Column<int>(nullable: false),
+                    BootCampId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_T_BCEmployee", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TB_T_BCEmployee_TB_M_BootCamp_BootCampId",
+                        column: x => x.BootCampId,
+                        principalTable: "TB_M_BootCamp",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TB_T_BCEmployee_TB_M_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "TB_M_Employee",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -122,13 +164,14 @@ namespace Project_IAP.Migrations
                 name: "TB_T_UserRole",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
                     RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_T_UserRole", x => new { x.UserId, x.RoleId });
-                    table.UniqueConstraint("AK_TB_T_UserRole_UserId", x => x.UserId);
+                    table.PrimaryKey("PK_TB_T_UserRole", x => x.Id);
                     table.ForeignKey(
                         name: "FK_TB_T_UserRole_TB_M_Role_RoleId",
                         column: x => x.RoleId,
@@ -144,25 +187,30 @@ namespace Project_IAP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_T_EmpInterview",
+                name: "TB_T_Contract",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EmployeeId = table.Column<int>(nullable: false),
                     InterviewId = table.Column<int>(nullable: false),
-                    ConfirmationEmp = table.Column<bool>(nullable: false),
-                    ConfirmationCompany = table.Column<bool>(nullable: false)
+                    StartContract = table.Column<DateTime>(nullable: true),
+                    EndContract = table.Column<DateTime>(nullable: true),
+                    ConfirmationEmp = table.Column<bool>(nullable: true),
+                    ConfirmationCompany = table.Column<bool>(nullable: true),
+                    Status = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_T_EmpInterview", x => new { x.EmployeeId, x.InterviewId });
+                    table.PrimaryKey("PK_TB_T_Contract", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TB_T_EmpInterview_TB_M_Employee_EmployeeId",
+                        name: "FK_TB_T_Contract_TB_M_Employee_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "TB_M_Employee",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TB_T_EmpInterview_TB_T_Interview_InterviewId",
+                        name: "FK_TB_T_Contract_TB_T_Interview_InterviewId",
                         column: x => x.InterviewId,
                         principalTable: "TB_T_Interview",
                         principalColumn: "Id",
@@ -170,8 +218,23 @@ namespace Project_IAP.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_T_EmpInterview_InterviewId",
-                table: "TB_T_EmpInterview",
+                name: "IX_TB_T_BCEmployee_BootCampId",
+                table: "TB_T_BCEmployee",
+                column: "BootCampId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_T_BCEmployee_EmployeeId",
+                table: "TB_T_BCEmployee",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_T_Contract_EmployeeId",
+                table: "TB_T_Contract",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_T_Contract_InterviewId",
+                table: "TB_T_Contract",
                 column: "InterviewId");
 
             migrationBuilder.CreateIndex(
@@ -188,18 +251,29 @@ namespace Project_IAP.Migrations
                 name: "IX_TB_T_UserRole_RoleId",
                 table: "TB_T_UserRole",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_T_UserRole_UserId",
+                table: "TB_T_UserRole",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TB_T_EmpInterview");
+                name: "TB_T_BCEmployee");
+
+            migrationBuilder.DropTable(
+                name: "TB_T_Contract");
 
             migrationBuilder.DropTable(
                 name: "TB_T_Replacement");
 
             migrationBuilder.DropTable(
                 name: "TB_T_UserRole");
+
+            migrationBuilder.DropTable(
+                name: "TB_M_BootCamp");
 
             migrationBuilder.DropTable(
                 name: "TB_T_Interview");

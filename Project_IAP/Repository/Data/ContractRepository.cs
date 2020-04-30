@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Project_IAP.Repository.Data
 {
-    public class UserRoleRepository : GeneralRepository<UserRole, MyContext>
+    public class ContractRepository : GeneralRepository<Contract, MyContext>
     {
-        public UserRoleRepository(MyContext mycontexts) : base(mycontexts)
+        public ContractRepository(MyContext mycontexts) : base(mycontexts)
         {
 
         }
