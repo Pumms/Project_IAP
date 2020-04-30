@@ -19,31 +19,5 @@ namespace Project_IAP.Context
         public DbSet<Role> role { get; set; }
         public DbSet<User> user { get; set; }
         public DbSet<UserRole> userrole { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserRole>().HasKey(x => new { x.UserId, x.RoleId });
-            modelBuilder.Entity<UserRole>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.UserRoles)
-                .HasForeignKey(x => x.UserId);
-
-            modelBuilder.Entity<UserRole>()
-                .HasOne(x => x.Role)
-                .WithMany(x => x.UserRoles)
-                .HasForeignKey(x => x.RoleId);
-
-            modelBuilder.Entity<EmpInterview>().HasKey(x => new { x.EmployeeId, x.InterviewId });
-            modelBuilder.Entity<EmpInterview>()
-                .HasOne(x => x.Employee)
-                .WithMany(x => x.EmpInterviews)
-                .HasForeignKey(x => x.EmployeeId);
-            
-            modelBuilder.Entity<EmpInterview>()
-                .HasOne(x => x.Interview)
-                .WithMany(x => x.EmpInterviews)
-                .HasForeignKey(x => x.InterviewId);
-
-        }
     }
 }

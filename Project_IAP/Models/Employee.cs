@@ -21,6 +21,6 @@ namespace Project_IAP.Models
         public string Religion { get; set; }
         public string PhoneNumber { get; set; }
         public bool WorkStatus { get; set; }
-        public IList<EmpInterview> EmpInterviews { get; set; }
+        //public IList<EmpInterview> EmpInterviews { get; set; }
     }
 }

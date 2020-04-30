@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\Project_IAP.csproj": {}
+    "D:\\VisualBC\\Project_IAP\\Project_IAP\\Project_IAP.csproj": {}
   },
   "projects": {
-    "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\Project_IAP.csproj": {
+    "D:\\VisualBC\\Project_IAP\\Project_IAP\\Project_IAP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
+        "projectUniqueName": "D:\\VisualBC\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
         "projectName": "Project_IAP",
-        "projectPath": "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
-        "packagesPath": "C:\\Users\\Pummels\\.nuget\\packages\\",
-        "outputPath": "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\obj\\",
+        "projectPath": "D:\\VisualBC\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
+        "packagesPath": "C:\\Users\\Pikri\\.nuget\\packages\\",
+        "outputPath": "D:\\VisualBC\\Project_IAP\\Project_IAP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Pummels\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pikri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,7 +51,7 @@
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[2.1.2, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",

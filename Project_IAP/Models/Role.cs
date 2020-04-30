@@ -14,6 +14,5 @@ namespace Project_IAP.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public IList<UserRole> UserRoles { get; set; }
     }
 }

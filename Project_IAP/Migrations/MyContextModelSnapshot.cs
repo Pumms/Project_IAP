@@ -40,15 +40,21 @@ namespace Project_IAP.Migrations
 
             modelBuilder.Entity("Project_IAP.Models.EmpInterview", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool?>("ConfirmationCompany");
+
+                    b.Property<bool?>("ConfirmationEmp");
+
                     b.Property<int>("EmployeeId");
 
                     b.Property<int>("InterviewId");
 
-                    b.Property<bool>("ConfirmationCompany");
+                    b.HasKey("Id");
 
-                    b.Property<bool>("ConfirmationEmp");
-
-                    b.HasKey("EmployeeId", "InterviewId");
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("InterviewId");
 
@@ -160,15 +166,19 @@ namespace Project_IAP.Migrations
 
             modelBuilder.Entity("Project_IAP.Models.UserRole", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("RoleId");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.Property<int>("UserId");
 
-                    b.HasAlternateKey("UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TB_T_UserRole");
                 });

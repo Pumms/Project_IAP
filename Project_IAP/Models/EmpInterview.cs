@@ -12,6 +12,7 @@ namespace Project_IAP.Models
     [Table("TB_T_EmpInterview")]
     public class EmpInterview
     {
+        public int Id { get; set; }
         public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
         public int InterviewId { get; set; }

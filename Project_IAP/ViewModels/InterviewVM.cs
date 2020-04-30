@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,5 +17,10 @@ namespace Project_IAP.ViewModels
         public DateTime InterviewDate { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
+        public class InterviewJson
+        {
+            [JsonProperty("data")]
+            public IList<InterviewVM> data { get; set; }
+        }
     }
 }
