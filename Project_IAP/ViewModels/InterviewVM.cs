@@ -18,6 +18,5 @@ namespace Project_IAP.ViewModels
         public string Gender { get; set; }
         public string Experience { get; set; }
         public string Education { get; set; }
-        public string DescriptionAddress { get; set; }
     }
 }

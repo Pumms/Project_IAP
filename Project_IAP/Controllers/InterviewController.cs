@@ -28,12 +28,5 @@ namespace Project_IAP.Controllers
             return await _interviewRepository.GetAllInterview();
         }
 
-        [HttpPost]
-        [Route("Apply")]
-        public async Task<ActionResult<Contract>> ApplyInterview(Contract contract)
-        {
-            var insert = await _interviewRepository.ApplyInterview(contract);
-            return Ok("Apply Success");
-        }
     }
 }

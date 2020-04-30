@@ -22,7 +22,7 @@ namespace Project_IAP.Models
         public string Address { get; set; }
         public string Gender { get; set; }
         public string Experience { get; set; }
-        public string Education { get; set; }
+        public string LastEducation { get; set; }
         public string DescriptionAddress { get; set; }
     }
 }
