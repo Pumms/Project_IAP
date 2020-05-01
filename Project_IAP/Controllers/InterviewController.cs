@@ -15,7 +15,7 @@ namespace Project_IAP.Controllers
     [ApiController]
     public class InterviewController : BaseController<Interview, InterviewRepository>
     {
-        InterviewRepository _interviewRepository;
+        private readonly InterviewRepository _interviewRepository;
         public InterviewController(InterviewRepository interviewRepository) : base(interviewRepository)
         {
             this._interviewRepository = interviewRepository;

@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Project_IAP.ViewModels
 {
@@ -18,5 +17,11 @@ namespace Project_IAP.ViewModels
         public string Gender { get; set; }
         public string Experience { get; set; }
         public string Education { get; set; }
+    }
+
+    public class CompanyJson
+    {
+        [JsonProperty("Data")]
+        public IList<InterviewVM> Data { get; set; }
     }
 }

@@ -19,25 +19,6 @@ namespace Project_IAP.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Project_IAP.Models.BCEmployee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BootCampId");
-
-                    b.Property<int>("EmployeeId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BootCampId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("TB_T_BCEmployee");
-                });
-
             modelBuilder.Entity("Project_IAP.Models.BootCamp", b =>
                 {
                     b.Property<int>("Id")
@@ -111,6 +92,8 @@ namespace Project_IAP.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
+                    b.Property<int>("BootCampId");
+
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
@@ -122,6 +105,8 @@ namespace Project_IAP.Migrations
                     b.Property<bool>("WorkStatus");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BootCampId");
 
                     b.ToTable("TB_M_Employee");
                 });
@@ -136,11 +121,11 @@ namespace Project_IAP.Migrations
 
                     b.Property<int>("CompanyId");
 
-                    b.Property<string>("DescriptionAddress");
+                    b.Property<string>("Description");
+
+                    b.Property<string>("DescriptionInterview");
 
                     b.Property<string>("Division");
-
-                    b.Property<string>("Education");
 
                     b.Property<string>("Experience");
 
@@ -149,6 +134,8 @@ namespace Project_IAP.Migrations
                     b.Property<DateTime>("InterviewDate");
 
                     b.Property<string>("JobDesk");
+
+                    b.Property<string>("LastEducation");
 
                     b.Property<string>("Title");
 
@@ -227,19 +214,6 @@ namespace Project_IAP.Migrations
                     b.ToTable("TB_T_UserRole");
                 });
 
-            modelBuilder.Entity("Project_IAP.Models.BCEmployee", b =>
-                {
-                    b.HasOne("Project_IAP.Models.BootCamp", "BootCamp")
-                        .WithMany()
-                        .HasForeignKey("BootCampId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Project_IAP.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Project_IAP.Models.Contract", b =>
                 {
                     b.HasOne("Project_IAP.Models.Employee", "Employee")
@@ -250,6 +224,14 @@ namespace Project_IAP.Migrations
                     b.HasOne("Project_IAP.Models.Interview", "Interview")
                         .WithMany()
                         .HasForeignKey("InterviewId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Project_IAP.Models.Employee", b =>
+                {
+                    b.HasOne("Project_IAP.Models.BootCamp", "BootCamp")
+                        .WithMany()
+                        .HasForeignKey("BootCampId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
