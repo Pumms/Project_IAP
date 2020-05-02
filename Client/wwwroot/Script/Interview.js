@@ -20,8 +20,8 @@ $(document).ready(function () {
             { "data": "address" },
             { "data": "gender" },
             { "data": "experience" },
-            { "data": "education" },
-            { "data": "descriptionAddress" },
+            { "data": "lastEducation" },
+            { "data": "description" },
             {
                 "data": "interviewDate", "render": function (data) {
                     return moment(data).format('DD/MM/YYYY, h:mm a');
@@ -79,8 +79,8 @@ function clearscreen() {
     $('#Address').val('');
     $('#JobDesk').val('');
     $('#Experience').val('');
-    $('#Education').val('');
-    $('#DescriptionAddress').val('');
+    $('#LastEducation').val('');
+    $('#Description').val('');
     $('#InterviewDate').val('');
     LoadCompany($('#CompanyOption'));
 } //clear field
@@ -103,8 +103,8 @@ function GetById(Id) {
             $('#Address').val(result.address);
             $('#JobDesk').val(result.jobDesk);
             $('#Experience').val(result.experience);
-            $('#Education').val(result.education);
-            $('#DescriptionAddress').val(result.descriptionAddress);
+            $('#LastEducation').val(result.lastEducation);
+            $('#Description').val(result.description);
             $('#InterviewDate').val(moment(result.interviewDate).format('YYYY-MM-DD'));
             $('#myModal').modal('show');
             $('#UpdateBtn').show();
@@ -133,8 +133,8 @@ function Save() {
     Interview.address = $('#Address').val();
     Interview.gender = $('#Gender').val();
     Interview.experience = $('#Experience').val();
-    Interview.education = $('#Education').val();
-    Interview.descriptionAddress = $('#DescriptionAddress').val();
+    Interview.lastEducation = $('#LastEducation').val();
+    Interview.description = $('#Description').val();
     Interview.interviewDate = $('#InterviewDate').val();
     $.ajax({
         type: 'POST',
@@ -175,8 +175,8 @@ function Edit() {
     Interview.address = $('#Address').val();
     Interview.gender = $('#Gender').val();
     Interview.experience = $('#Experience').val();
-    Interview.education = $('#Education').val();
-    Interview.descriptionAddress = $('#DescriptionAddress').val();
+    Interview.lastEducation = $('#LastEducation').val();
+    Interview.description = $('#Description').val();
     Interview.interviewDate = $('#InterviewDate').val();
     $.ajax({
         type: 'POST',

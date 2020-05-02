@@ -17,6 +17,6 @@ namespace Project_IAP.Models
         public virtual Employee Employee { get; set; }
         public string ReplacementReason { get; set; }
         public string Detail { get; set; }
-        public bool Confirmation { get; set; }
+        public Nullable<bool> Confirmation { get; set; }
     }
 }

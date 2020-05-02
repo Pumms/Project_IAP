@@ -6,3 +6,5 @@ Client/obj/Debug/netcoreapp2.1/Client.csprojAssemblyReference.cache
 Client/obj/Debug/netcoreapp2.1/Client.RazorAssemblyInfo.cache
 Client/obj/Debug/netcoreapp2.1/Client.RazorAssemblyInfo.cs
 Project_IAP/obj/Debug/netcoreapp2.1/Project_IAP.csprojAssemblyReference.cache
+.vs/Project_IAP/config/applicationhost.config
+.vs/Project_IAP/DesignTimeBuild/.dtbcache.v2

@@ -21,6 +21,10 @@ namespace Project_IAP.Models
         public DateTime BirthDate { get; set; }
         public string Religion { get; set; }
         public string PhoneNumber { get; set; }
+        public string Telphone { get; set; }
+        public string Gender { get; set; }
+        public string Experience { get; set; }
+        public string LastEducation { get; set; }
         public bool WorkStatus { get; set; }
     }
 }

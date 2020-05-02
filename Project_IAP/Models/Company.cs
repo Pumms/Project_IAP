@@ -21,7 +21,7 @@ namespace Project_IAP.Models
     }
     public class CompanyJson
     {
-        [JsonProperty("Data")]
+        [JsonProperty("data")]
         public IList<Company> Data { get; set; }
     }
 }
