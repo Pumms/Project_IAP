@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Project_IAP.Models;
@@ -20,19 +16,10 @@ namespace Client.Controllers
 
         public IActionResult Index()
         {
-            //var role = HttpContext.Session.GetString("Role");
-            //if (role == "Admin")
-            //{
-            //}
-            //else
-            //{
-            //    return RedirectToAction("notfound", "Auth");
-            //}
-            return View(LoadCompany());
+            return View();
         }
         public JsonResult LoadCompany()
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
             CompanyJson company = null;
             var responseTask = client.GetAsync("Company");
             responseTask.Wait();
@@ -51,7 +38,6 @@ namespace Client.Controllers
 
         public JsonResult InsertOrUpdate(Company company)
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
             var myContent = JsonConvert.SerializeObject(company);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);
@@ -67,11 +53,10 @@ namespace Client.Controllers
                 return Json(result);
             }
         }
-        public JsonResult GetById(int Id)
+        public JsonResult GetById(int id)
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
             Company company = null;
-            var responseTask = client.GetAsync("Company/" + Id);
+            var responseTask = client.GetAsync("Company/" + id);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
@@ -85,10 +70,9 @@ namespace Client.Controllers
             }
             return Json(company);
         }
-        public JsonResult Delete(int Id)
+        public JsonResult Delete(int id)
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
-            var result = client.DeleteAsync("Company/" + Id).Result;
+            var result = client.DeleteAsync("Company/" + id).Result;
             return Json(result);
         }
     }

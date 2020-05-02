@@ -32,12 +32,12 @@ namespace Project_IAP
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
             services.AddScoped<CompanyRepository>();
-            //services.AddScoped<EmpInterviewRepository>();
+            services.AddScoped<PlacementRepository>();
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<InterviewRepository>();
             services.AddScoped<ReplacementRepository>();
-            services.AddScoped<RoleRepository>();
-            services.AddScoped<UserRepository>();
+            //services.AddScoped<RoleRepository>();
+            //services.AddScoped<UserRepository>();
             //services.AddScoped<UserRoleRepository>();
         }
 

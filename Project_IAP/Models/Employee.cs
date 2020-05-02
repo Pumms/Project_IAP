@@ -13,6 +13,8 @@ namespace Project_IAP.Models
     {
         [Key]
         public int Id { get; set; }
+        public int BootCampId { get; set; }
+        public virtual BootCamp BootCamp { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }

@@ -31,16 +31,5 @@ namespace Project_IAP.Repository.Data
                 return data;
             }
         }
-        public async Task<IEnumerable<Contract>> ApplyInterview(Contract contract)
-        {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
-            {
-                var spName = "SP_Insert_TB_T_Contract";
-                parameters.Add("@EmployeeId", contract.EmployeeId);
-                parameters.Add("@InterviewId", contract.InterviewId);
-                var data = await connection.QueryAsync<Contract>(spName, parameters, commandType: CommandType.StoredProcedure);
-                return data;
-            }
-        }
     }
 }

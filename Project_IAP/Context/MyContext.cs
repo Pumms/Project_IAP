@@ -12,11 +12,10 @@ namespace Project_IAP.Context
     {
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
         public DbSet<BootCamp> bootcamp { get; set; }
-        public DbSet<Contract> contract { get; set; }
+        public DbSet<Placement> contract { get; set; }
         public DbSet<Employee> employee { get; set; }
         public DbSet<Company> company { get; set; }
         public DbSet<Interview> interview { get; set; }
-        public DbSet<BCEmployee> bcemployee { get; set; }
         public DbSet<Replacement> replacement { get; set; }
         public DbSet<Role> role { get; set; }
         public DbSet<User> user { get; set; }

@@ -1,10 +1,7 @@
 ﻿using Project_IAP.Base;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Project_IAP.Models
 {
@@ -22,7 +19,8 @@ namespace Project_IAP.Models
         public string Address { get; set; }
         public string Gender { get; set; }
         public string Experience { get; set; }
-        public string Education { get; set; }
-        public string DescriptionAddress { get; set; }
+        public string LastEducation { get; set; }
+        public string Description { get; set; }
+        public string DescriptionInterview { get; set; }
     }
 }
