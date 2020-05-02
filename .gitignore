@@ -3,3 +3,13 @@
 Project_IAP/appsettings.json
 Project_IAP/Migrations/20200502063146_AddallTable.Designer.cs
 Project_IAP/Migrations/20200502063146_AddallTable.cs
+Client/obj/Debug/netcoreapp2.1/Client.AssemblyInfo.cs
+Client/obj/Debug/netcoreapp2.1/Client.AssemblyInfoInputs.cache
+Client/obj/Debug/netcoreapp2.1/Client.csprojAssemblyReference.cache
+Client/obj/Debug/netcoreapp2.1/Client.RazorAssemblyInfo.cache
+Client/obj/Debug/netcoreapp2.1/Client.RazorAssemblyInfo.cs
+Project_IAP/obj/Debug/netcoreapp2.1/Project_IAP.AssemblyInfo.cs
+Project_IAP/obj/Debug/netcoreapp2.1/Project_IAP.AssemblyInfoInputs.cache
+Project_IAP/obj/Debug/netcoreapp2.1/Project_IAP.csprojAssemblyReference.cache
+Project_IAP/obj/Debug/netcoreapp2.1/Project_IAP.RazorAssemblyInfo.cache
+Project_IAP/obj/Debug/netcoreapp2.1/Project_IAP.RazorAssemblyInfo.cs
