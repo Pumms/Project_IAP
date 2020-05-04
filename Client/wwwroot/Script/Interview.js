@@ -1,7 +1,7 @@
 ﻿var datenow = new Date();
 var Company = [];
 $(document).ready(function () {
-    table = $('#Interview').dataTable({
+    $('#Interview').dataTable({
         "ajax": {
             url: "/Interview/LoadInterview",
             type: "GET",
@@ -9,32 +9,30 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columnDefs": [
-            { "orderable": false, "targets": 10 },
-            { "searchable": false, "targets": 10 }
+            { "orderable": false, "targets": 4 },
+            { "searchable": false, "targets": 4 }
         ],
         "columns": [
-            { "data": "title" },
-            { "data": "companyName" },
-            { "data": "division" },
-            { "data": "jobDesk" },
-            { "data": "address" },
-            { "data": "gender" },
-            { "data": "experience" },
-            { "data": "education" },
-            { "data": "descriptionAddress" },
+            { data: "title" },
+            { data: "companyName" },
+            { data: "description" },
             {
-                "data": "interviewDate", "render": function (data) {
+                data: "interviewDate", render: function (data) {
                     return moment(data).format('DD/MM/YYYY, h:mm a');
                 }
             },
             {
                 data: null, render: function (data, type, row) {
-                    return " <td><button type='button' class='btn btn-warning' id='BtnEdit' onclick=GetById('" + row.id + "');>Edit</button> <button type='button' class='btn btn-danger' id='BtnDelete' onclick=Delete('" + row.id + "');>Delete</button ></td >";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail' data-toggle='tooltips' data-placement='top' title='Detail' onclick=Detail('" + row.id + "');><i class='mdi mdi-open-in-new'></i></button> <button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltips' data-placement='top' title='Edit' onclick=GetById('" + row.id + "');><i class='mdi mdi-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltips' data-placement='top' title='Delete' onclick=Delete('" + row.id + "');><i class='mdi mdi-delete'></i></button></div></td>";
                 }
             },
         ]
     });
     LoadCompany($('#CompanyOption'));
+
+    $(function () {
+        $('[data-toggle="tooltips"]').tooltip()
+    });
 }); //load table Interview
 /*--------------------------------------------------------------------------------------------------*/
 function LoadCompany(element) {
@@ -63,6 +61,9 @@ function renderCompany(element) {
 /*--------------------------------------------------------------------------------------------------*/
 document.getElementById("BtnAdd").addEventListener("click", function () {
     clearscreen();
+    $('#Gender').val('selected');
+    $('#Experience').val('selected');
+    $('#LastEducation').val('selected');
     $('#SaveBtn').show();
     $('#UpdateBtn').hide();
     LoadCompany($('#CompanyOption'));
@@ -79,8 +80,8 @@ function clearscreen() {
     $('#Address').val('');
     $('#JobDesk').val('');
     $('#Experience').val('');
-    $('#Education').val('');
-    $('#DescriptionAddress').val('');
+    $('#LastEducation').val('');
+    $('#Description').val('');
     $('#InterviewDate').val('');
     LoadCompany($('#CompanyOption'));
 } //clear field
@@ -103,8 +104,8 @@ function GetById(Id) {
             $('#Address').val(result.address);
             $('#JobDesk').val(result.jobDesk);
             $('#Experience').val(result.experience);
-            $('#Education').val(result.education);
-            $('#DescriptionAddress').val(result.descriptionAddress);
+            $('#LastEducation').val(result.lastEducation);
+            $('#Description').val(result.description);
             $('#InterviewDate').val(moment(result.interviewDate).format('YYYY-MM-DD'));
             $('#myModal').modal('show');
             $('#UpdateBtn').show();
@@ -133,8 +134,8 @@ function Save() {
     Interview.address = $('#Address').val();
     Interview.gender = $('#Gender').val();
     Interview.experience = $('#Experience').val();
-    Interview.education = $('#Education').val();
-    Interview.descriptionAddress = $('#DescriptionAddress').val();
+    Interview.lastEducation = $('#LastEducation').val();
+    Interview.description = $('#Description').val();
     Interview.interviewDate = $('#InterviewDate').val();
     $.ajax({
         type: 'POST',
@@ -175,8 +176,8 @@ function Edit() {
     Interview.address = $('#Address').val();
     Interview.gender = $('#Gender').val();
     Interview.experience = $('#Experience').val();
-    Interview.education = $('#Education').val();
-    Interview.descriptionAddress = $('#DescriptionAddress').val();
+    Interview.lastEducation = $('#LastEducation').val();
+    Interview.description = $('#Description').val();
     Interview.interviewDate = $('#InterviewDate').val();
     $.ajax({
         type: 'POST',
