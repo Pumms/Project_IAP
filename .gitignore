@@ -27,9 +27,6 @@ Client/bin/Debug/netcoreapp2.1/Client.Views.pdb
 Client/bin/Debug/netcoreapp2.1/Project_IAP.dll
 Client/bin/Debug/netcoreapp2.1/Project_IAP.pdb
 Client/bin/Debug/netcoreapp2.1/Properties/launchSettings.json
-Client/Controllers/EmpInterviewController.cs
-Client/Controllers/InterviewController.cs
-Client/Controllers/PlacementController.cs
 Client/obj/Debug/netcoreapp2.1/Client.assets.cache
 Client/obj/Debug/netcoreapp2.1/Client.csproj.CopyComplete
 Client/obj/Debug/netcoreapp2.1/Client.csproj.CoreCompileInputs.cache
@@ -67,8 +64,6 @@ Client/obj/Debug/netcoreapp2.1/Client.csproj.FileListAbsolute.txt
 Client/obj/Debug/netcoreapp2.1/Client.Views.dll
 Client/Startup.cs
 Client/Startup.cs
-Client/Controllers/EmpInterviewController.cs
-Client/Controllers/InterviewController.cs
 Project_IAP/bin/Debug/netcoreapp2.1/appsettings.Development.json
 Project_IAP/bin/Debug/netcoreapp2.1/appsettings.json
 Project_IAP/bin/Debug/netcoreapp2.1/Project_IAP.deps.json
@@ -77,8 +72,6 @@ Project_IAP/bin/Debug/netcoreapp2.1/Project_IAP.pdb
 Project_IAP/bin/Debug/netcoreapp2.1/Project_IAP.runtimeconfig.dev.json
 Project_IAP/bin/Debug/netcoreapp2.1/Project_IAP.runtimeconfig.json
 Project_IAP/bin/Debug/netcoreapp2.1/Properties/launchSettings.json
-Project_IAP/Controllers/ContractController.cs
-Project_IAP/Controllers/PlacementController.cs
 Project_IAP/Migrations/20200502071947_AddallTable.cs
 Project_IAP/Migrations/20200502071947_AddallTable.Designer.cs
 Project_IAP/obj/Debug/netcoreapp2.1/Project_IAP.RazorTargetAssemblyInfo.cache
