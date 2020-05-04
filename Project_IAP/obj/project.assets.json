@@ -13128,19 +13128,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pikri\\.nuget\\packages\\": {}
+    "C:\\Users\\Pummels\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualBC\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
+      "projectUniqueName": "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
       "projectName": "Project_IAP",
-      "projectPath": "D:\\VisualBC\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
-      "packagesPath": "C:\\Users\\Pikri\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualBC\\Project_IAP\\Project_IAP\\obj\\",
+      "projectPath": "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\Project_IAP.csproj",
+      "packagesPath": "C:\\Users\\Pummels\\.nuget\\packages\\",
+      "outputPath": "D:\\Tugas Akhir\\Project_IAP\\Project_IAP\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Pikri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pummels\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
