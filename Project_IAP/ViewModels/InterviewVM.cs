@@ -23,7 +23,7 @@ namespace Project_IAP.ViewModels
 
     public class CompanyJson
     {
-        [JsonProperty("Data")]
-        public IList<InterviewVM> Data { get; set; }
+        [JsonProperty("data")]
+        public IList<InterviewVM> data { get; set; }
     }
 }

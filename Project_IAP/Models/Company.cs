@@ -19,9 +19,10 @@ namespace Project_IAP.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
     }
+
     public class CompanyJson
     {
         [JsonProperty("data")]
-        public IList<Company> Data { get; set; }
+        public IList<Company> data { get; set; }
     }
 }

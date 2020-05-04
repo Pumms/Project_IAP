@@ -1,5 +1,7 @@
-﻿using Project_IAP.Base;
+﻿using Newtonsoft.Json;
+using Project_IAP.Base;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,10 +16,8 @@ namespace Project_IAP.Models
         public virtual Employee Employee { get; set; }
         public int InterviewId { get; set; }
         public virtual Interview Interview { get; set; }
-        public Nullable<bool> ConfirmationEmp { get; set; }
-        public Nullable<bool> ConfirmationCompany { get; set; }
         public Nullable<DateTime> StartContract { get; set; }
         public Nullable<DateTime> EndContract { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public int Status { get; set; }
     }
 }

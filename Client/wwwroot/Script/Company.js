@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    debugger;
-    table = $('#Company').dataTable({
+    //debugger;
+    $('#Company').dataTable({
         "ajax": {
             url: "/Company/LoadCompany",
             type: "GET",
@@ -11,16 +11,20 @@
             { "searchable": false, "targets": 4 }
         ],
         "columns": [
-            { "data": "name" },
-            { "data": "address" },
-            { "data": "phoneNumber" },
-            { "data": "email" },
+            { data: "name" },
+            { data: "address" },
+            { data: "phoneNumber" },
+            { data: "email" },
             {
                 data: null, render: function (data, type, row) {
-                    return " <td><button type='button' class='btn btn-warning' id='BtnEdit' onclick=GetById('" + row.id + "');>Edit</button> <button type='button' class='btn btn-danger' id='BtnDelete' onclick=Delete('" + row.id + "');>Delete</button ></td >";
+                    return "<td><button type='button' class='btn btn-warning mb-1' id='BtnEdit' data-toggle='tooltip' data-placement='top' title='Edit' onclick=GetById('" + row.id + "');><i class='mdi mdi-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' onclick=Delete('" + row.id + "');><i class='mdi mdi-delete'></i></button></td>";
                 }
             },
         ]
+    });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
     });
 }); //load table Company
 /*--------------------------------------------------------------------------------------------------*/
