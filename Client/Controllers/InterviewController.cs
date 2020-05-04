@@ -20,11 +20,10 @@ namespace Client.Controllers
         };
         public IActionResult Index()
         {
-            return View(LoadInterview());
+            return View();
         }
         public JsonResult LoadInterview()
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
             IEnumerable<InterviewVM> interview = null;
             var responseTask = client.GetAsync("Interview/List");
             responseTask.Wait();
