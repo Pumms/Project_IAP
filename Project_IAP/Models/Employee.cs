@@ -1,4 +1,5 @@
-﻿using Project_IAP.Base;
+﻿using Newtonsoft.Json;
+using Project_IAP.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,5 +27,10 @@ namespace Project_IAP.Models
         public string Experience { get; set; }
         public string LastEducation { get; set; }
         public bool WorkStatus { get; set; }
+    }
+    public class EmployeeJson
+    {
+        [JsonProperty("data")]
+        public IList<Employee> Data { get; set; }
     }
 }

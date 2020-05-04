@@ -36,6 +36,7 @@ namespace Project_IAP
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<InterviewRepository>();
             services.AddScoped<ReplacementRepository>();
+            services.AddScoped<BootCampRepository>();
             //services.AddScoped<RoleRepository>();
             //services.AddScoped<UserRepository>();
             //services.AddScoped<UserRoleRepository>();

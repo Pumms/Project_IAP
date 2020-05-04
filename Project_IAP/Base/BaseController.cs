@@ -56,7 +56,7 @@ namespace Project_IAP.Base
             {
                 return NotFound();
             }
-            return delete;
+            return Ok("Delete Successfully");
         }
     }
 }

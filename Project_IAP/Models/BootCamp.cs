@@ -1,4 +1,5 @@
-﻿using Project_IAP.Base;
+﻿using Newtonsoft.Json;
+using Project_IAP.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,5 +16,10 @@ namespace Project_IAP.Models
         public int Id { get; set; }
         public string Batch { get; set; }
         public string Class { get; set; }
+    }
+    public class BootCampJson
+    {
+        [JsonProperty("data")]
+        public IList<BootCamp> Data { get; set; }
     }
 }
