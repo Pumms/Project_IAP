@@ -7,3 +7,4 @@ Client/obj/Debug/netcoreapp2.1/Client.RazorAssemblyInfo.cache
 Client/obj/Debug/netcoreapp2.1/Client.RazorAssemblyInfo.cs
 .vs/Project_IAP/config/applicationhost.config
 .vs/Project_IAP/DesignTimeBuild/.dtbcache.v2
+Project_IAP/appsettings.json
