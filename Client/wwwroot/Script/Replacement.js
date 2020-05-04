@@ -8,16 +8,25 @@ $(document).ready(function () {
             dataSrc: "",
         },
         "columnDefs": [
-            { "orderable": false, "targets": 3 },
-            { "searchable": false, "targets": 3 }
+            { "orderable": false, "targets": 4 },
+            { "searchable": false, "targets": 4 }
         ],
         "columns": [
             { "data": "employeeName" },
             { "data": "replacementReason" },
             { "data": "detail" },
             {
+                "data": "confirmation", "render": function (data) {
+                    if (data == true) {
+                        return "Accepted";
+                    } else if (data == false){
+                        return "Rejected";
+                    }
+                }
+            },
+            {
                 data: null, render: function (data, type, row) {
-                    return " <td><button type='button' class='btn btn-warning' id='BtnEdit' onclick=GetById('" + row.id + "');>Edit</button> <button type='button' class='btn btn-danger' id='BtnDelete' onclick=Delete('" + row.id + "');>Delete</button> <button type='button' class='btn btn-danger' id='BtnConfirm' onclick=Confirm('" + row.id + "');>Confirm</button ></td >";
+                    return " <td><button type='button' class='btn btn-warning' id='BtnEdit' onclick=GetById('" + row.id + "');>Edit</button> <button type='button' class='btn btn-danger' id='BtnDelete' onclick=Delete('" + row.id + "');>Delete</button> <button type='button' class='btn btn-info' id='BtnConfirm' onclick=Confirm('" + row.id + "');>Confirm</button ></td >";
                 }
             },
         ]
@@ -221,7 +230,7 @@ function Confirm(Id) {
 
     swalWithBootstrapButtons.fire({
         title: 'Are you sure?',
-        text: "You will confirm this Replacement",
+        text: "You will confirm this Request",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, Accept',
