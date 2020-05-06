@@ -40,6 +40,25 @@ namespace Client.Controllers
             return Json(placement);
         }
         
+        public JsonResult LoadEmployee()
+        {
+            IEnumerable<User> user = null;
+            var responseTask = client.GetAsync("User/GetAll");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<User>>();
+                readTask.Wait();
+                user = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(user);
+        }
+
         public JsonResult LoadEmpInterview()
         {
             IEnumerable<PlacementVM> placement = null;
@@ -78,6 +97,17 @@ namespace Client.Controllers
             return Json(placement);
         }
 
+        public JsonResult AssignEmployee(Placement placement)
+        {
+            var myContent = JsonConvert.SerializeObject(placement);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = client.PostAsync("Placement/AssignEmployee", byteContent).Result;
+            return Json(result);
+        }
+
         public JsonResult ConfirmInterview(PlacementVM placement)
         {
             var myContent = JsonConvert.SerializeObject(placement);
@@ -85,7 +115,7 @@ namespace Client.Controllers
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var result = client.PutAsync("Placement/ConfirmInterview/"+placement.Id, byteContent).Result;
+            var result = client.PutAsync("Placement/ConfirmInterview/" + placement.Id, byteContent).Result;
             return Json(result);
         }
 
@@ -102,6 +132,7 @@ namespace Client.Controllers
 
         public JsonResult GetByStatus(int id)
         {
+            id = '1';
             IEnumerable<PlacementVM> placement = null;
             var responseTask = client.GetAsync("Placement/GetByStatus/" + id);
             responseTask.Wait();

@@ -12,8 +12,8 @@ namespace Project_IAP.Models
     {
         [Key]
         public int Id { get; set; }
-        public int EmployeeId { get; set; }
-        public virtual Employee Employee { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
         public int InterviewId { get; set; }
         public virtual Interview Interview { get; set; }
         public Nullable<DateTime> StartContract { get; set; }

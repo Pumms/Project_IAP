@@ -13,10 +13,11 @@ namespace Project_IAP.Models
     {
         [Key]
         public int Id { get; set; }
-        public int EmployeeId { get; set; }
-        public virtual Employee Employee { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
         public string ReplacementReason { get; set; }
         public string Detail { get; set; }
+        public DateTime ReplacementDate { get; set; }
         public Nullable<bool> Confirmation { get; set; }
     }
 }

@@ -50,23 +50,14 @@ namespace Project_IAP.Controllers
         {
             return await _placementRepository.GetByStatus(id);
         }
-
-        //User
-        [HttpGet("EmpId")]
-        [Route("DataUser")]
-        public async Task<ActionResult<Placement>> DataUser(int EmpId)
-        {
-            await _placementRepository.DataUser(EmpId);
-            return Ok("Apply Success");
-        }
         //End For List Data Placement
 
         [HttpPost]
-        [Route("ApplyInterview")]
-        public async Task<ActionResult<Placement>> ApplyInterview(Placement entity)
+        [Route("AssignEmployee")]
+        public async Task<ActionResult<Placement>> AssignEmployee(Placement placement)
         {
-            await _placementRepository.Post(entity);
-            return CreatedAtAction("Get", new { id = entity.Id }, entity);
+            await _placementRepository.AssignEmployee(placement);
+            return Ok("Assign Success");
         }
 
         [HttpPut]
@@ -119,25 +110,13 @@ namespace Project_IAP.Controllers
             return Ok("Confirmation success, Employee Placement");
         }
 
-        [HttpPut]
-        [Route("InterviewDone/{id}")]
-        public async Task<ActionResult<Placement>> InterviewDone(int id, Placement entity)
-        {
-            if (id != entity.Id)
-            {
-                return BadRequest();
-            }
-            await _placementRepository.InterviewDone(entity.Id);
-            return Ok("Confirmation success, Interview Done");
-        }
-
         public IActionResult SendEmail(PlacementVM placement, string status)
         {
             var message = new MimeMessage();
             //Pengirim Email, parameter : Nama Pengirim, Email Pengirim
             message.From.Add(new MailboxAddress("Admin", "web.tester1998@gmail.com"));
             //Penerima Email, parameter : Nama Penerima, Email Penerima
-            message.To.Add(new MailboxAddress(placement.EmployeeName, placement.Email));
+            message.To.Add(new MailboxAddress(placement.FullName, placement.Email));
 
             var date = DateTime.Now.ToShortDateString();
             var interviewdate = placement.InterviewDate.ToShortDateString();
@@ -148,10 +127,10 @@ namespace Project_IAP.Controllers
                 message.Subject = "Confirmation Placement " + date;
                 message.Body = new TextPart("html")
                 {
-                    Text = "Dear " + placement.EmployeeName + ",<br>" +
+                    Text = "Dear " + placement.FullName + ",<br>" +
                    "Your Interview has been Confirmed, here your Data Contract : <br>" +
-                   "Start Contract : "+ placement.StartContract + "<br>" +
-                   "End Contract : "+ placement.EndContract + "<br><br>" +
+                   "Start Contract : " + placement.StartContract.ToShortDateString() + "<br>" +
+                   "End Contract : " + placement.EndContract.ToShortDateString() + "<br><br>" +
                    "Best Regards <br>" +
                    "Admin"//For Body Message
                 };
@@ -162,7 +141,7 @@ namespace Project_IAP.Controllers
                 message.Subject = "Job Application Canceled " + date;
                 message.Body = new TextPart("html")
                 {
-                    Text = "Dear " + placement.EmployeeName + ",<br>" +
+                    Text = "Dear " + placement.FullName + ",<br>" +
                    "Sorry, your Apply has been Canceled, try again in another Interview and Good luck! <br><br>" +
                    "Best Regards <br>" +
                    "Admin"
@@ -174,10 +153,10 @@ namespace Project_IAP.Controllers
                 message.Subject = "Confirmation Interview " + date;
                 message.Body = new TextPart("html")
                 {
-                    Text = "Dear " + placement.EmployeeName + ",<br>" +
+                    Text = "Dear " + placement.FullName + ",<br>" +
                 "Your Apply has been Confirmed, here Address for Interview : <br>" +
                 "Date Interview :"+ interviewdate + "<br>"+
-                placement.DescriptionInterview + "<br><br>" +
+                placement.DescriptionInterview + "<br>" +
                 "Best Regards <br>" +
                 "Admin"
                 };

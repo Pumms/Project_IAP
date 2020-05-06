@@ -21,6 +21,6 @@ namespace Project_IAP.Models
         public string Experience { get; set; }
         public string LastEducation { get; set; }
         public string Description { get; set; }
-        public string DescriptionInterview { get; set; }
+        public string AddressInterview { get; set; }
     }
 }

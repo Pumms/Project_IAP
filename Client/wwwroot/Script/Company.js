@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
-    //debugger;
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
     $('#Company').dataTable({
         "ajax": {
             url: "/Company/LoadCompany",
@@ -17,14 +20,10 @@
             { data: "email" },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><button type='button' class='btn btn-warning mb-1' id='BtnEdit' data-toggle='tooltip' data-placement='top' title='Edit' onclick=GetById('" + row.id + "');><i class='mdi mdi-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' onclick=Delete('" + row.id + "');><i class='mdi mdi-delete'></i></button></td>";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
                 }
             },
         ]
-    });
-
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
     });
 }); //load table Company
 /*--------------------------------------------------------------------------------------------------*/
@@ -77,7 +76,7 @@ function Save() {
             url: '/Company/InsertOrUpdate',
             data: Company,
         }).then((result) => {
-            if (result.statusCode == 200) {
+            if (result.statusCode == 201) {
                 Swal.fire({
                     icon: 'success',
                     potition: 'center',
@@ -115,8 +114,7 @@ function Edit() {
         data: Company
     }).then((result) => {
         debugger;
-        //if (result.statusCode == 200) {
-        if (isStatusCodeSuccess = true) {
+        if (result.statusCode == 200) {
             Swal.fire({
                 icon: 'success',
                 potition: 'center',
@@ -142,12 +140,11 @@ function Delete(Id) {
     });
     Swal.fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        text: "You won't be able to Revert this!",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Yes, Delete it!"
     }).then((result) => {
         if (result.value) {
-            //debugger;
             $.ajax({
                 url: "/Company/Delete/",
                 data: { Id: Id }
@@ -158,7 +155,7 @@ function Delete(Id) {
                         icon: 'success',
                         position: 'center',
                         title: 'Delete Successfully',
-                        timer: 2000
+                        timer: 2500
                     }).then(function () {
                         table.ajax.reload();
                         cls();
