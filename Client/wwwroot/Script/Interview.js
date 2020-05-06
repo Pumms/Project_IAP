@@ -27,7 +27,7 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail' data-toggle='tooltip' data-placement='top' title='Detail' data-original-title='Detail' onclick=Detail('" + row.id + "');><i class='fa fa-external-link'></i></button> <button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-placement='top' title='Edit' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-placement='top' title='Edit' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
                 }
             },
         ]
@@ -196,7 +196,7 @@ function Edit() {
                 timer: 2500
             }).then(function () {
                 table.ajax.reload();
-                $('#Interview').modal('hide');
+                $('#myModal').modal('hide');
                 clearscreen();
             });
         } else {

@@ -102,6 +102,16 @@ namespace Project_IAP.Repository.Data
             return entity;
         }
 
+        public async Task<IEnumerable<PlacementVM>> WorkStatusTrue()
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_SetWorkStatus_TB_T_Employee";
+                var data = await connection.QueryAsync<PlacementVM>(spName, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
+
         public async Task<IEnumerable<PlacementVM>> GetByStatus(int id)
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))

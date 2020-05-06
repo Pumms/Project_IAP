@@ -130,9 +130,19 @@ namespace Client.Controllers
             return Json(result);
         }
 
+        public JsonResult CancelPlacement(PlacementVM placement)
+        {
+            var myContent = JsonConvert.SerializeObject(placement);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = client.PutAsync("Placement/CancelPlacement/" + placement.Id, byteContent).Result;
+            return Json(result);
+        }
+
         public JsonResult GetByStatus(int id)
         {
-            id = '1';
             IEnumerable<PlacementVM> placement = null;
             var responseTask = client.GetAsync("Placement/GetByStatus/" + id);
             responseTask.Wait();

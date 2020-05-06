@@ -37,7 +37,7 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail' data-toggle='tooltip' data-placement='top' title='Detail' onclick=Detail('" + row.id + "');><i class='mdi mdi-open-in-new'></i></button> <button class='btn  btn-success' id='BtnAcc' data-toggle='tooltip' data-placement='top' title='Accept Interview' onclick=GetByStatus('" + row.id + "');><i class='mdi mdi-check'></i></button>";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail' data-toggle='tooltip' data-placement='top' title='Detail' onclick=Detail('" + row.id + "');><i class='mdi mdi-open-in-new'></i></button> <button class='btn  btn-success' id='BtnAcc' data-toggle='tooltip' data-placement='top' title='Accept Interview' onclick=GetByStatus('" + row.id + "');><i class='mdi mdi-check'></i></button></div></td>";
                 }
             },
         ]
@@ -70,7 +70,7 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail2' data-toggle='tooltip' data-placement='top' title='Detail' data-original-title='Detail' onclick=Detail('" + row.id + "');><i class='fa fa-external-link'></i></button> <button class='btn btn-success' id='BtnAcc2' data-toggle='tooltip' data-placement='top' title='' data-original-title='Confirmation' onclick=GetByStatus2('" + row.id + "');><i class='fa fa-check'></i></button>";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail2' data-toggle='tooltip' data-placement='top' title='Detail' data-original-title='Detail' onclick=Detail('" + row.id + "');><i class='fa fa-external-link'></i></button> <button class='btn btn-success' id='BtnAcc2' data-toggle='tooltip' data-placement='top' title='' data-original-title='Confirmation' onclick=GetByStatus2('" + row.id + "');><i class='fa fa-check'></i></button> <button class='btn btn-danger' id='BtnCancel2' data-toggle='tooltip' data-placement='top' title='' data-original-title='Cancel' onclick=Cancel('" + row.id + "');><i class='fa fa-cross'></i></button> </div></td>";
                 }
             },
         ]
@@ -341,14 +341,19 @@ function AssignEmployee() {
 /*--------------------------------------------------------------------------------------------------*/
 function ConfirmPlacement() {
     $.fn.dataTable.ext.errMode = 'none';
-    var table = $('#Placement').DataTable({
+    var table = $('#Interview').DataTable({
         "ajax": {
-            url: "/Placement/LoadPlacement/"
+            url: "/Placement/LoadPlacement"
         }
     });
-    var table2 = $('#History').DataTable({
+    var table2 = $('#Placement').DataTable({
         "ajax": {
-            url: "/Placement/LoadHistory/"
+            url: "/Placement/LoadPlacement"
+        }
+    });
+    var table3 = $('#History').DataTable({
+        "ajax": {
+            url: "/Placement/LoadHistory"
         }
     });
     var startDate = new Date($('#StartContract').val());
@@ -420,19 +425,37 @@ function ConfirmPlacement() {
 }//function confirmation placement
 /*--------------------------------------------------------------------------------------------------*/
 function Cancel(Id) {
+    $.fn.dataTable.ext.errMode = 'none';
+    var table = $('#Interview').DataTable({
+        "ajax": {
+            url: "/Placement/LoadPlacement"
+        }
+    });
+    var table2 = $('#Placement').DataTable({
+        "ajax": {
+            url: "/Placement/LoadPlacement"
+        }
+    });
+    var table3 = $('#History').DataTable({
+        "ajax": {
+            url: "/Placement/LoadHistory"
+        }
+    });
+
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Yes, Cancel it!",
+        confirmButtonColor: red
     }).then((result) => {
         if (result.value) {
-            ////debugger;
+            //debugger;
             $.ajax({
-                url: "/Placement/Cancel/",
+                url: "/Placement/CancelPlacement/",
                 data: { Id: Id }
             }).then((result) => {
-                ////debugger;
+                //debugger;
                 if (result.statusCode == 200) {
                     Swal.fire({
                         icon: 'success',
@@ -441,6 +464,8 @@ function Cancel(Id) {
                         timer: 2000
                     }).then(function () {
                         table.ajax.reload();
+                        table2.ajax.reload();
+                        table3.ajax.reload();
                         cls();
                     });
                 }
