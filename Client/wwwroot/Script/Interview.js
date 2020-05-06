@@ -13,15 +13,9 @@ $(document).ready(function () {
             { "searchable": false, "targets": 4 }
         ],
         "columns": [
-            { "data": "title" },
-            { "data": "companyName" },
-            { "data": "division" },
-            { "data": "jobDesk" },
-            { "data": "address" },
-            { "data": "gender" },
-            { "data": "experience" },
-            { "data": "lastEducation" },
-            { "data": "description" },
+            { data: "title" },
+            { data: "companyName" },
+            { data: "description" },
             {
                 data: "interviewDate", render: function (data) {
                     return moment(data).format('DD/MM/YYYY, h:mm a');
@@ -29,16 +23,15 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail' data-toggle='tooltips' data-placement='top' title='Detail' onclick=Detail('" + row.id + "');><i class='mdi mdi-open-in-new'></i></button> <button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltips' data-placement='top' title='Edit' onclick=GetById('" + row.id + "');><i class='mdi mdi-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltips' data-placement='top' title='Delete' onclick=Delete('" + row.id + "');><i class='mdi mdi-delete'></i></button></div></td>";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail' data-toggle='tooltip' data-placement='top' title='' data-original-title='Detail' onclick=Detail('" + row.id + "');><i class='mdi mdi-open-in-new'></i></button> <button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-placement='top' title='' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='mdi mdi-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='mdi mdi-delete'></i></button></div></td>";
                 }
             },
         ]
     });
-    LoadCompany($('#CompanyOption'));
-
     $(function () {
-        $('[data-toggle="tooltips"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip()
     });
+    LoadCompany($('#CompanyOption'));
 }); //load table Interview
 /*--------------------------------------------------------------------------------------------------*/
 function LoadCompany(element) {

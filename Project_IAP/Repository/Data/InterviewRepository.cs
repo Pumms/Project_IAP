@@ -31,5 +31,18 @@ namespace Project_IAP.Repository.Data
                 return data;
             }
         }
+        public async Task<IEnumerable<InterviewVM>> GetEmployee(InterviewVM interview)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_RetrieveEmployee_TB_T_Interview";
+                parameters.Add("@jobdesk", interview.JobDesk);
+                parameters.Add("@lastedu", interview.LastEducation);
+                parameters.Add("@exp", interview.Experience);
+                parameters.Add("@gender", interview.Gender);
+                var data = await connection.QueryAsync<InterviewVM>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
     }
 }
