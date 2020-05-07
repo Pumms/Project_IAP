@@ -16,7 +16,7 @@ namespace Client.Controllers
 
         public IActionResult Index()
         {
-            return View(LoadCompany());
+            return View();
         }
         public JsonResult LoadCompany()
         {

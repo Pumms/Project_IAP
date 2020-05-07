@@ -4802,6 +4802,7 @@
         "dependencies": {
           "Dapper": "2.0.35",
           "MailKit": "2.6.0",
+          "Microsoft.AspNetCore.Mvc.Analyzers": "2.1.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.10"
         },
         "compile": {

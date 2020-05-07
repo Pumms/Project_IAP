@@ -33,13 +33,9 @@ namespace Project_IAP
             services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
             services.AddScoped<CompanyRepository>();
             services.AddScoped<PlacementRepository>();
-            services.AddScoped<EmployeeRepository>();
             services.AddScoped<InterviewRepository>();
             services.AddScoped<ReplacementRepository>();
-            services.AddScoped<BootCampRepository>(); 
-            //services.AddScoped<RoleRepository>();
-            //services.AddScoped<UserRepository>();
-            //services.AddScoped<UserRoleRepository>();
+            services.AddScoped<UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

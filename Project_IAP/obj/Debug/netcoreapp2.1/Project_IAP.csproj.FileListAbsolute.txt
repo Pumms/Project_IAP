@@ -16,20 +16,3 @@ D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.Razor
 D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.dll
 D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.pdb
 D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.genruntimeconfig.cache
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.Development.json
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.json
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.deps.json
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimeconfig.json
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimeconfig.dev.json
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.dll
-D:\VisualBC\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.pdb
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csproj.CoreCompileInputs.cache
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cache
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cs
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.AssemblyInfoInputs.cache
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.AssemblyInfo.cs
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorTargetAssemblyInfo.cache
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.dll
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.pdb
-D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.genruntimeconfig.cache

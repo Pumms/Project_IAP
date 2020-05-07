@@ -20,8 +20,9 @@ namespace Client.Controllers
         };
         public IActionResult Index()
         {
-            return View(LoadInterview());
+            return View();
         }
+
         public JsonResult LoadInterview()
         {
             IEnumerable<InterviewVM> interview = null;
@@ -76,6 +77,7 @@ namespace Client.Controllers
             }
             return Json(interview);
         }
+
         public JsonResult Delete(int Id)
         {
             //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));

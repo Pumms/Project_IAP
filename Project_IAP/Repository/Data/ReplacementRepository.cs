@@ -32,6 +32,15 @@ namespace Project_IAP.Repository.Data
                 return data;
             }
         }
+        public async Task<IEnumerable<ReplacementVM>> GetHistoryReplacement()
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_RetrieveHistory_TB_T_Replacement";
+                var data = await connection.QueryAsync<ReplacementVM>(spName, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
         public async Task<IEnumerable<Replacement>> PutConfirm(Replacement replacement)
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
@@ -43,7 +52,7 @@ namespace Project_IAP.Repository.Data
                 return data;
             }
         }
-        public async Task<Replacement> Conf0(int id)
+        public async Task<Replacement> CancelReplacement(int id)
         {
             var entity = await Get(id);
             if (entity == null)
@@ -55,7 +64,7 @@ namespace Project_IAP.Repository.Data
             await _myContext.SaveChangesAsync();
             return entity;
         }
-        public async Task<Replacement> Conf1(int id)
+        public async Task<Replacement> ConfirmReplacement(int id)
         {
             var entity = await Get(id);
             if (entity == null)
@@ -66,6 +75,36 @@ namespace Project_IAP.Repository.Data
             _myContext.Entry(entity).State = EntityState.Modified;
             await _myContext.SaveChangesAsync();
             return entity;
+        }
+        public async Task<IEnumerable<ReplacementVM>> GetByStatus(int id)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_DataSendEmail_TB_T_Replacement";
+                parameters.Add("@Id", id);
+                var data = await connection.QueryAsync<ReplacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
+        public async Task<IEnumerable<ReplacementVM>> GetByEmployee(int id)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_RetreiveEmployee_TB_T_Replacement";
+                parameters.Add("@Id", id);
+                var data = await connection.QueryAsync<ReplacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
+        public async Task<IEnumerable<ReplacementVM>> GetHistoryByEmployee(int id)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_RetrieveHistoryEmployee_TB_T_Replacement";
+                parameters.Add("@Id", id);
+                var data = await connection.QueryAsync<ReplacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return data;
+            }
         }
     }
 }

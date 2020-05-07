@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Replacement";
     Layout = "~/Views/Layouts/Layout.cshtml";
 }
 
@@ -53,7 +53,7 @@
                         </div>
                         <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="placement-tab">
                             <div class="table-responsive m-t-40">
-                                <table id="History" class="table table-striped" width="100%">
+                                <table id="HistoryReplacement" class="table table-striped" width="100%">
                                     <thead>
                                         <tr>
                                             <th>Employee Name</th>
@@ -88,13 +88,14 @@
                         <input type="hidden" class="form-control" id="Email">
                         <input type="hidden" class="form-control" id="FullName">
                         <input type="hidden" class="form-control" id="RepDate">
+                        <input type="hidden" class="form-control" id="EmployeeOption" value="@ViewData["Id"]">
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label for="EmployeeOption">Employee Name :</label>
                         <div class="form-group">
                             <select class="form-control" id="EmployeeOption"></select>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         <label for="Address">Replacement Reason :</label>
                         <input class="form-control" id="ReplacementReason" placeholder="ReplacementReason">
@@ -118,5 +119,5 @@
     </div>
 </div>
 @section scripts{
-    <script src="~/Script/Replacement.js"></script>
+    <script src="~/Script/User.js"></script>
 }

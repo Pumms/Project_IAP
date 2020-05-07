@@ -18,7 +18,7 @@ namespace Project_IAP.ViewModels
         public string Experience { get; set; }
         public string LastEducation { get; set; }
         public string Description { get; set; }
-        public string DescriptionInterview { get; set; }
+        public string AddressInterview { get; set; }
     }
 
     public class CompanyJson

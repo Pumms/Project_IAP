@@ -20,6 +20,7 @@ namespace Project_IAP.Controllers
         {
             this._interviewRepository = interviewRepository;
         }
+
         [HttpGet]
         [Route("List")]
         public async Task<IEnumerable<InterviewVM>> GetAll()

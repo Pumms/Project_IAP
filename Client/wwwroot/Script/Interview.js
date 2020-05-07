@@ -1,6 +1,10 @@
 ﻿var datenow = new Date();
 var Company = [];
 $(document).ready(function () {
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
     $('#Interview').dataTable({
         "ajax": {
             url: "/Interview/LoadInterview",
@@ -18,18 +22,15 @@ $(document).ready(function () {
             { data: "description" },
             {
                 data: "interviewDate", render: function (data) {
-                    return moment(data).format('DD/MM/YYYY, h:mm a');
+                    return moment(data).format('DD/MM/YYYY');
                 }
             },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><div class='btn-group'><button type='button' class='btn btn-secondary' id='BtnDetail' data-toggle='tooltip' data-placement='top' title='' data-original-title='Detail' onclick=Detail('" + row.id + "');><i class='mdi mdi-open-in-new'></i></button> <button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-placement='top' title='' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='mdi mdi-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='mdi mdi-delete'></i></button></div></td>";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-placement='top' title='Edit' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
                 }
             },
         ]
-    });
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
     });
     LoadCompany($('#CompanyOption'));
 }); //load table Interview
@@ -66,8 +67,6 @@ document.getElementById("BtnAdd").addEventListener("click", function () {
     $('#SaveBtn').show();
     $('#UpdateBtn').hide();
     LoadCompany($('#CompanyOption'));
-    $('#divemail').show();
-    $('#divpass').show();
 }); //fungsi btn add
 /*--------------------------------------------------------------------------------------------------*/
 function clearscreen() {
@@ -81,6 +80,7 @@ function clearscreen() {
     $('#Experience').val('');
     $('#LastEducation').val('');
     $('#Description').val('');
+    $('#AddressInterview').val('');
     $('#InterviewDate').val('');
     LoadCompany($('#CompanyOption'));
 } //clear field
@@ -105,6 +105,7 @@ function GetById(Id) {
             $('#Experience').val(result.experience);
             $('#LastEducation').val(result.lastEducation);
             $('#Description').val(result.description);
+            $('#AddressInterview').val(result.addressInterview);
             $('#InterviewDate').val(moment(result.interviewDate).format('YYYY-MM-DD'));
             $('#myModal').modal('show');
             $('#UpdateBtn').show();
@@ -126,16 +127,18 @@ function Save() {
         }
     });
     var Interview = new Object();
-    Interview.title = $('#Title').val();
-    Interview.companyId = $('#CompanyOption').val();
-    Interview.division = $('#Division').val();
-    Interview.jobDesk = $('#JobDesk').val();
-    Interview.address = $('#Address').val();
-    Interview.gender = $('#Gender').val();
-    Interview.experience = $('#Experience').val();
-    Interview.lastEducation = $('#LastEducation').val();
-    Interview.description = $('#Description').val();
-    Interview.interviewDate = $('#InterviewDate').val();
+    Interview.Id = $('#Id').val();
+    Interview.Title = $('#Title').val();
+    Interview.CompanyId = $('#CompanyOption').val();
+    Interview.Division = $('#Division').val();
+    Interview.JobDesk = $('#JobDesk').val();
+    Interview.Address = $('#Address').val();
+    Interview.Gender = $('#Gender').val();
+    Interview.Experience = $('#Experience').val();
+    Interview.LastEducation = $('#LastEducation').val();
+    Interview.InterviewDate = $('#InterviewDate').val();
+    Interview.Description = $('#Description').val();
+    Interview.AddressInterview = $('#Description').val();
     $.ajax({
         type: 'POST',
         url: '/Interview/InsertOrUpdate',
@@ -167,24 +170,25 @@ function Edit() {
         }
     });
     var Interview = new Object();
-    Interview.id = $('#Id').val();
-    Interview.title = $('#Title').val();
-    Interview.companyId = $('#CompanyOption').val();
-    Interview.division = $('#Division').val();
-    Interview.jobDesk = $('#JobDesk').val();
-    Interview.address = $('#Address').val();
-    Interview.gender = $('#Gender').val();
-    Interview.experience = $('#Experience').val();
-    Interview.lastEducation = $('#LastEducation').val();
-    Interview.description = $('#Description').val();
-    Interview.interviewDate = $('#InterviewDate').val();
+    Interview.Id = $('#Id').val();
+    Interview.Title = $('#Title').val();
+    Interview.CompanyId = $('#CompanyOption').val();
+    Interview.Division = $('#Division').val();
+    Interview.JobDesk = $('#JobDesk').val();
+    Interview.Address = $('#Address').val();
+    Interview.Gender = $('#Gender').val();
+    Interview.Experience = $('#Experience').val();
+    Interview.LastEducation = $('#LastEducation').val();
+    Interview.InterviewDate = $('#InterviewDate').val();
+    Interview.Description = $('#Description').val();
+    Interview.AddressInterview = $('#AddressInterview').val();
     $.ajax({
         type: 'POST',
         url: '/Interview/InsertOrUpdate',
         data: Interview
     }).then((result) => {
         debugger;
-        if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
+        if (result.statusCode === 200) {
             Swal.fire({
                 icon: 'success',
                 potition: 'center',
@@ -192,7 +196,7 @@ function Edit() {
                 timer: 2500
             }).then(function () {
                 table.ajax.reload();
-                $('#Interview').modal('hide');
+                $('#myModal').modal('hide');
                 clearscreen();
             });
         } else {

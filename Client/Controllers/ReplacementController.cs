@@ -39,6 +39,24 @@ namespace Client.Controllers
             }
             return Json(replacement);
         }
+        public JsonResult LoadReplacementHistory()
+        {
+            IEnumerable<ReplacementVM> replacement = null;
+            var responseTask = client.GetAsync("Replacement/History");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<ReplacementVM>>();
+                readTask.Wait();
+                replacement = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(replacement);
+        }
         public JsonResult InsertOrUpdate(Replacement replacement)
         {
             var myContent = JsonConvert.SerializeObject(replacement);
@@ -78,15 +96,60 @@ namespace Client.Controllers
             var result = client.DeleteAsync("Replacement/" + id).Result;
             return Json(result);
         }
-        public JsonResult Confirm0(int id)
+        public JsonResult GetByStatus(int id)
         {
-            var result = client.DeleteAsync("Replacement/Confirm0/" + id).Result;
+            IEnumerable<ReplacementVM> replacement = null;
+            var responseTask = client.GetAsync("Replacement/GetByStatus/" + id);
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<ReplacementVM>>();
+                readTask.Wait();
+                replacement = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server error, try after some time");
+            }
+            return Json(replacement);
+        }
+        public JsonResult ConfirmReplacement(ReplacementVM replacement)
+        {
+            var myContent = JsonConvert.SerializeObject(replacement);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = client.PutAsync("Replacement/ConfirmReplacement/" + replacement.Id, byteContent).Result;
             return Json(result);
         }
-        public JsonResult Confirm1(int id)
+        public JsonResult CancelReplacement(ReplacementVM replacement)
         {
-            var result = client.DeleteAsync("Replacement/Confirm1/" + id).Result;
+            var myContent = JsonConvert.SerializeObject(replacement);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = client.PutAsync("Replacement/CancelReplacement/" + replacement.Id, byteContent).Result;
             return Json(result);
+        }
+        public JsonResult LoadUser()
+        {
+            UserJson user = null;
+            var responseTask = client.GetAsync("User");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var json = JsonConvert.DeserializeObject(result.Content.ReadAsStringAsync().Result).ToString();
+                user = JsonConvert.DeserializeObject<UserJson>(json);
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(user);
         }
     }
 }

@@ -1,11 +1,68 @@
 ﻿var Employee = [];
 $(document).ready(function () {
-    table = $('#Replacement').dataTable({
+    $.fn.dataTable.ext.errMode = 'none';
+
+    $('#Placement').dataTable({
         "ajax": {
-            url: "/Replacement/LoadReplacement",
+            url: "/User/LoadUserPlacement",
             type: "GET",
             dataType: "json",
-            dataSrc: "",
+            dataSrc: ""
+        },
+        "columns": [
+            { data: "companyName" },
+            { data: "title" },
+            { data: "address" },
+            {
+                data: "interviewDate", render: function (data) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            {
+                data: "status", render: function (data) {
+                    return "<span class='badge badge-pill badge-info'>Waiting for Result</span>";
+
+                }
+            },
+        ]
+    });
+
+    $('#History').dataTable({
+        "ajax": {
+            url: "/User/LoadUserHistory",
+            type: "GET",
+            dataType: "json",
+            dataSrc: ""
+        },
+        "columns": [
+            { data: "companyName" },
+            { data: "title" },
+            { data: "address" },
+            {
+                data: "interviewDate", render: function (data) {
+                    return moment(data).format('DD/MM/YYYY');
+                }
+            },
+            {
+                data: "status", render: function (data) {
+                    if (data == 2) {
+                        return "<span class='badge badge-pill badge-success'>Done</span>";
+                    }
+                    else if (data == 3) {
+                        return "<span class='badge badge-pill badge-danger'>Cancel</span>";
+                    }
+
+                }
+            },
+        ]
+    });
+
+    $('#Replacement').dataTable({
+        "ajax": {
+            url: "/User/LoadByEmployee",
+            type: "GET",
+            dataType: "json",
+            dataSrc: ""
         },
         "columnDefs": [
             { "orderable": false, "targets": 5 },
@@ -24,26 +81,27 @@ $(document).ready(function () {
                 "data": "confirmation", "render": function (data) {
                     if (data == true) {
                         return "<span class='badge badge-pill badge-info'>Accepted</span>"
-                    } else if (data == false){
+                    } else if (data == false) {
                         return "<span class='badge badge-pill badge-info'>Rejected</span>"
-                    }else if (data == null){
+                    } else if (data == null) {
                         return "<span class='badge badge-pill badge-info'>Not Confirm yet</span>"
                     }
                 }
             },
             {
                 data: null, render: function (data, type, row) {
-                    return " <td><div class='btn-group'></button> <button type='button' class='btn btn-info' data-toggle='tooltip' data-placement='top' title='Accept' id='BtnConfirm' onclick=GetByStatus('" + row.id + "');><i class='mdi mdi-check'></i></button > <button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Reject' id='BtnConfirm' onclick=GetByStatus0('" + row.id + "');><i class='mdi mdi-window-close'></i></button ></div></td >";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
                 }
             },
         ]
     });
-    table = $('#History').dataTable({
+
+    $('#HistoryReplacement').dataTable({
         "ajax": {
-            url: "/Replacement/LoadReplacementHistory",
+            url: "/User/LoadHistoryByEmployee",
             type: "GET",
             dataType: "json",
-            dataSrc: "",
+            dataSrc: ""
         },
         "columns": [
             { "data": "fullName" },
@@ -68,7 +126,7 @@ $(document).ready(function () {
         ]
     });
     LoadEmployee($('#EmployeeOption'));
-}); //load table Replacement
+}); //load table
 /*--------------------------------------------------------------------------------------------------*/
 function LoadEmployee(element) {
     if (Employee.length === 0) {
@@ -192,6 +250,7 @@ function Edit() {
     Replacement.userId = $('#EmployeeOption').val();
     Replacement.replacementReason = $('#ReplacementReason').val();
     Replacement.detail = $('#Detail').val();
+    Replacement.replacementDate = $('#ReplacementDate').val();
     $.ajax({
         type: 'POST',
         url: '/Replacement/InsertOrUpdate',
@@ -206,6 +265,7 @@ function Edit() {
                 timer: 2500
             }).then(function () {
                 table.ajax.reload();
+                $('#myModal').modal('hide');
                 clearscreen();
             });
         } else {
@@ -258,176 +318,4 @@ function Delete(Id) {
         }
     });
 } //function delete
-/*--------------------------------------------------------------------------------------------------*/
-function GetByStatus(id) {
-    debugger;
-    $.ajax({
-        url: "/Replacement/GetByStatus/" + id,
-        type: "GET",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        async: false,
-        success: function (result) {
-            debugger;
-            $('#Id').val(result[0].id);
-            $('#Email').val(result[0].email);
-            $('#FullName').val(result[0].fullName);
-            $('#ReplacementReason').val(result[0].replacementReason);
-            $('#Detail').val(result[0].detail);
-            $('#RepDate').val(result[0].replacementDate);
-            ConfirmReplacement();
-        },
-        error: function (errormessage) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Failed to Get Data',
-            });
-        }
-    })
-} //get data for confirm
-/*--------------------------------------------------------------------------------------------------*/
-function GetByStatus0(id) {
-    debugger;
-    $.ajax({
-        url: "/Replacement/GetByStatus/" + id,
-        type: "GET",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        async: false,
-        success: function (result) {
-            debugger;
-            $('#Id').val(result[0].id);
-            $('#Email').val(result[0].email);
-            $('#FullName').val(result[0].fullName);
-            $('#ReplacementReason').val(result[0].replacementReason);
-            $('#Detail').val(result[0].detail);
-            $('#RepDate').val(result[0].replacementDate);
-            CancelReplacement();
-        },
-        error: function (errormessage) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Failed to Get Data',
-            });
-        }
-    })
-} //get data for confirm
-/*--------------------------------------------------------------------------------------------------*/
-function ConfirmReplacement() {
-    $.fn.dataTable.ext.errMode = 'none';
-    var table = $('#Replacement').DataTable({
-        "ajax": {
-            url: "/Replacement/LoadReplacement"
-        }
-    });
-    var table1 = $('#History').DataTable({
-        "ajax": {
-            url: "/Replacement/LoadReplacementHistory"
-        }
-    });
-    Swal.fire({
-        title: "Are you sure to Accept ?",
-        text: "You won't be able to Revert this!",
-        showCancelButton: true,
-        showLoaderOnConfirm: true,
-        confirmButtonText: "Yes, Confirmation!",
-        cancelButtonColor: "Red",
-    }).then((result) => {
-        if (result.value) {
-            debugger;
-            var Replacement = new Object();
-            Replacement.Id = $('#Id').val();
-            Replacement.Email = $('#Email').val();
-            Replacement.FullName = $('#FullName').val();
-            Replacement.ReplacementReason = $('#ReplacementReason').val();
-            Replacement.Detail = $('#Detail').val();
-            Replacement.ReplacementDate = $('#RepDate').val();
-            $.ajax({
-                type: 'POST',
-                url: '/Replacement/ConfirmReplacement',
-                data: Replacement
-            }).then((result) => {
-                debugger;
-                if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
-                    Swal.fire({
-                        icon: 'success',
-                        potition: 'center',
-                        title: 'Replacement has been Accepted',
-                        timer: 2500
-                    }).then(function () {
-                        table.ajax.reload();
-                        table1.ajax.reload();
-                        clearscreen();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Failed to Confirmation',
-                    });
-                }
-            })
-        }
-    })
-}
-/*--------------------------------------------------------------------------------------------------*/
-function CancelReplacement() {
-    $.fn.dataTable.ext.errMode = 'none';
-    var table = $('#Replacement').DataTable({
-        "ajax": {
-            url: "/Replacement/LoadReplacement"
-        }
-    });
-    var table1 = $('#History').DataTable({
-        "ajax": {
-            url: "/Replacement/LoadReplacementHistory"
-        }
-    });
-    Swal.fire({
-        title: "Are you sure to Reject ?",
-        text: "You won't be able to Revert this!",
-        showCancelButton: true,
-        showLoaderOnConfirm: true,
-        confirmButtonText: "Yes, Reject !",
-        cancelButtonColor: "Red",
-    }).then((result) => {
-        if (result.value) {
-            var Replacement = new Object();
-            debugger;
-            Replacement.Id = $('#Id').val();
-            Replacement.Email = $('#Email').val();
-            Replacement.FullName = $('#FullName').val();
-            Replacement.ReplacementReason = $('#ReplacementReason').val();
-            Replacement.Detail = $('#Detail').val();
-            Replacement.ReplacementDate = $('#RepDate').val();
-            $.ajax({
-                type: 'POST',
-                url: '/Replacement/CancelReplacement',
-                data: Replacement
-            }).then((result) => {
-                debugger;
-                if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
-                    Swal.fire({
-                        icon: 'success',
-                        potition: 'center',
-                        title: 'Replacement has been Rejected',
-                        timer: 2500
-                    }).then(function () {
-                        table.ajax.reload();
-                        table1.ajax.reload();
-                        clearscreen();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Failed to Confirmation',
-                    });
-                }
-            })
-        }
-    })
-}
 /*--------------------------------------------------------------------------------------------------*/
