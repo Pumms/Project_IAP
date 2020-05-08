@@ -298,13 +298,13 @@
                                         <div class="dw-user-box">
                                             <div class="u-img"><img src="http://devonbatproject.org/wp-content/uploads/2016/02/765-default-avatar-300x300.png" alt="user"></div>
                                             <div class="u-text">
-                                                <h4>UserName</h4>
-                                                <p class="text-muted">user@gmail.com</p>
+                                                <h4>@ViewData["Name"]</h4>
+                                                <p class="text-muted">@ViewData["Email"]</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="@Url.Action("Logout","Auth")"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -331,7 +331,7 @@
                     <div class="profile-img"> <img src="http://devonbatproject.org/wp-content/uploads/2016/02/765-default-avatar-300x300.png" alt="user" /> </div>
                     <!-- User profile text-->
                     <div class="profile-text">
-                        User Name
+                        @ViewData["Name"]
                     </div>
                 </div>
                 <!-- End User profile text-->
@@ -339,18 +339,18 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
-                        <li>
+                        <li id="panel1">
                             <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-dashboard"></i><span class="hide-menu">Dashboard </span></a>
-                            <ul aria-expanded="false" class="collapse" id="panel1">
+                            <ul aria-expanded="false" class="collapse" >
                                 <li>@Html.ActionLink("Company", "Index", "Company")</li>
                                 <li>@Html.ActionLink("Interview", "Index", "Interview")</li>
                                 <li>@Html.ActionLink("Placement", "Index", "Placement")</li>
                                 <li>@Html.ActionLink("Replacement", "Index", "Replacement")</li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="panel2">
                             <a class="has-arrow mt-2" href="#" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Main Menu</span></a>
-                            <ul aria-expanded="false" class="collapse" id="panel1">
+                            <ul aria-expanded="false" class="collapse" >
                                 <li>@Html.ActionLink("Placement", "Index", "User")</li>
                                 <li>@Html.ActionLink("Replacement", "Replacement", "User")</li>
                             </ul>
@@ -360,12 +360,12 @@
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
-            <div class="sidebar-footer d-flex justify-content-between">
+            <div class="sidebar-footer d-flex justify-content-end">
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ti-settings"></i></a>
+                @*<a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ti-settings"></i></a>*@
 
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
+                <a href="@Url.Action("Logout","Auth")" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
             </div>
         </aside>
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->

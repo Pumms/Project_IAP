@@ -33,6 +33,8 @@ $(document).ready(function () {
         ]
     });
     LoadCompany($('#CompanyOption'));
+    $('#panel1').show();
+    $('#panel2').hide();
 }); //load table Interview
 /*--------------------------------------------------------------------------------------------------*/
 function LoadCompany(element) {

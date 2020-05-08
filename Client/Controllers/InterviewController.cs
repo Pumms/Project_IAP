@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Project_IAP.Models;
@@ -20,7 +21,21 @@ namespace Client.Controllers
         };
         public IActionResult Index()
         {
-            return View();
+            var role = HttpContext.Session.GetString("Role");
+            if (role == "Admin")
+            {
+                ViewData["Name"] = HttpContext.Session.GetString("FullName");
+                ViewData["Email"] = HttpContext.Session.GetString("Email");
+                return View();
+            }
+            else if (role == "User")
+            {
+                return RedirectToAction("Page404", "Auth");
+            }
+            else
+            {
+                return RedirectToAction("Page404", "Auth");
+            }
         }
 
         public JsonResult LoadInterview()

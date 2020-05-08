@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Project_IAP.Models;
@@ -13,7 +14,6 @@ namespace Client.Controllers
 {
     public class UserController : Controller
     {
-        int UserId = 2;
         private HttpClient client = new HttpClient
         {
             BaseAddress = new Uri("https://localhost:44379/api/")
@@ -21,17 +21,45 @@ namespace Client.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var role = HttpContext.Session.GetString("Role");
+            if (role == "User")
+            {
+                ViewData["Name"] = HttpContext.Session.GetString("FullName");
+                ViewData["Email"] = HttpContext.Session.GetString("Email");
+                return View();
+            }
+            else if (role == "Admin")
+            {
+                return RedirectToAction("Page404", "Auth");
+            }
+            else
+            {
+                return RedirectToAction("Page404", "Auth");
+            }
         }
         public IActionResult Replacement()
         {
-            ViewData["Id"] = UserId;
-            return View();
+            var role = HttpContext.Session.GetString("Role");
+            if (role == "User")
+            {
+                ViewData["Id"] = HttpContext.Session.GetString("Id");
+                ViewData["Name"] = HttpContext.Session.GetString("FullName");
+                ViewData["Email"] = HttpContext.Session.GetString("Email");
+                return View();
+            }
+            else if (role == "Admin")
+            {
+                return RedirectToAction("Page404", "Auth");
+            }
+            else
+            {
+                return RedirectToAction("Page404", "Auth");
+            }
         }
 
         public JsonResult LoadUserHistory()
         {
-            int id = 1; //session id user yang login
+            int id = int.Parse(HttpContext.Session.GetString("Id")); //session id user yang login
             IEnumerable<PlacementVM> placement = null;
             var responseTask = client.GetAsync("Placement/DataUserHistory/" + id);
             responseTask.Wait();
@@ -70,7 +98,7 @@ namespace Client.Controllers
         }
         public JsonResult LoadByEmployee()
         {
-            int id = 2;
+            int id = int.Parse(HttpContext.Session.GetString("Id"));
             IEnumerable<ReplacementVM> replacement = null;
             var responseTask = client.GetAsync("Replacement/GetByEmployee/" + id);
             responseTask.Wait();
@@ -89,7 +117,7 @@ namespace Client.Controllers
         }
         public JsonResult LoadHistoryByEmployee()
         {
-            int id = 2;
+            int id = int.Parse(HttpContext.Session.GetString("Id"));
             IEnumerable<ReplacementVM> replacement = null;
             var responseTask = client.GetAsync("Replacement/GetHistoryByEmployee/" + id);
             responseTask.Wait();

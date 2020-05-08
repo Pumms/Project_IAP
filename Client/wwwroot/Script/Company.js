@@ -25,6 +25,8 @@
             },
         ]
     });
+    $('#panel1').show();
+    $('#panel2').hide();
 }); //load table Company
 /*--------------------------------------------------------------------------------------------------*/
 function GetById(id) {
@@ -44,6 +46,7 @@ function GetById(id) {
             $('#myModal').modal('show');
             $('#UpdateBtn').show();
             $('#SaveBtn').hide();
+            
         },
         error: function (errormessage) {
             alert(errormessage.responsText);

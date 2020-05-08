@@ -33,7 +33,7 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return " <td><div class='btn-group'></button> <button type='button' class='btn btn-info' data-toggle='tooltip' data-placement='top' title='Accept' id='BtnConfirm' onclick=GetByStatus('" + row.id + "');><i class='mdi mdi-check'></i></button > <button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Reject' id='BtnConfirm' onclick=GetByStatus0('" + row.id + "');><i class='mdi mdi-window-close'></i></button ></div></td >";
+                    return " <td><div class='btn-group'></button> <button type='button' class='btn btn-info' data-toggle='tooltip' data-placement='top' title='Accept' id='BtnConfirm' onclick=GetByStatus('" + row.id + "');><i class='fa fa-check'></i></button > <button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Reject' id='BtnConfirm' onclick=GetByStatus0('" + row.id + "');><i class='fa fa-minus'></i></button ></div></td >";
                 }
             },
         ]
@@ -68,6 +68,8 @@ $(document).ready(function () {
         ]
     });
     LoadEmployee($('#EmployeeOption'));
+    $('#panel1').show();
+    $('#panel2').hide();
 }); //load table Replacement
 /*--------------------------------------------------------------------------------------------------*/
 function LoadEmployee(element) {

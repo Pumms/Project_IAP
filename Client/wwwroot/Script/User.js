@@ -125,6 +125,8 @@ $(document).ready(function () {
             }
         ]
     });
+    $('#panel1').hide();
+    $('#panel2').show();
     LoadEmployee($('#EmployeeOption'));
 }); //load table
 /*--------------------------------------------------------------------------------------------------*/

@@ -16,8 +16,8 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columnDefs": [
-            { "orderable": false, "targets": 5 },
-            { "searchable": false, "targets": 5 }
+            { "orderable": false, "targets": 6 },
+            { "searchable": false, "targets": 6 }
         ],
         "columns": [
             { data: "fullName" },
@@ -50,8 +50,8 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columnDefs": [
-            { "orderable": false, "targets": 5 },
-            { "searchable": false, "targets": 5 }
+            { "orderable": false, "targets": 6 },
+            { "searchable": false, "targets": 6 }
         ],
         "columns": [
             { "data": "fullName" },
@@ -122,6 +122,8 @@ $(document).ready(function () {
 
     LoadEmployee($('#SelectEmployee'));
     LoadInterview($('#SelectInterview'));
+    $('#panel1').show();
+    $('#panel2').hide();
 }); //load table
 /*--------------------------------------------------------------------------------------------------*/
 function LoadEmployee(element) {
@@ -287,7 +289,6 @@ function ConfirmInterview() {
         showCancelButton: true,
         showLoaderOnConfirm: true,
         confirmButtonText: "Yes, Confirmation!",
-        cancelButtonColor: "Red",
     }).then((result) => {
         if (result.value) {
             var Placement = new Object();
@@ -369,7 +370,7 @@ function AssignEmployee() {
             });
         }
         else {
-            Swal.fire('Error', 'Failed to Assign Employee', 'error');
+            Swal.fire('Error', 'Please Select Employee & Interview', 'error');
         }
     })
 } //function Assign Employee
@@ -415,7 +416,6 @@ function ConfirmPlacement() {
             text: "You won't be able to Revert this!",
             showCancelButton: true,
             confirmButtonText: "Yes, Confirmation!",
-            cancelButtonColor: "Red",
         }).then((result) => {
             if (result.value) {
                 var Placement = new Object();
