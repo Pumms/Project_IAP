@@ -10,6 +10,11 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: "companyName" },
             { data: "title" },
             { data: "address" },
@@ -35,6 +40,11 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: "companyName" },
             { data: "title" },
             { data: "address" },
@@ -69,6 +79,11 @@ $(document).ready(function () {
             { "searchable": false, "targets": 5 }
         ],
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { "data": "fullName" },
             { "data": "replacementReason" },
             { "data": "detail" },
@@ -104,6 +119,11 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { "data": "fullName" },
             { "data": "replacementReason" },
             { "data": "detail" },

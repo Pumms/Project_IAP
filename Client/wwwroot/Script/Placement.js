@@ -16,10 +16,16 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columnDefs": [
-            { "orderable": false, "targets": 6 },
-            { "searchable": false, "targets": 6 }
+            { "orderable": false, "targets": 7 },
+            { "searchable": false, "targets": 7 },
+            { "searchable": false, "orderable": false, "targets": 0 }
         ],
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: "fullName" },
             { data: "companyName" },
             { data: "email" },
@@ -50,10 +56,16 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columnDefs": [
-            { "orderable": false, "targets": 6 },
-            { "searchable": false, "targets": 6 }
+            { "orderable": false, "targets": 7 },
+            { "searchable": false, "targets": 7 },
+            { "searchable": false, "orderable": false, "targets": 0 }
         ],
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { "data": "fullName" },
             { "data": "companyName" },
             { "data": "email" },
@@ -84,6 +96,11 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: "fullName" },
             { data: "companyName" },
             {

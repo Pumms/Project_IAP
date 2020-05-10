@@ -13,10 +13,15 @@ $(document).ready(function () {
             dataSrc: ""
         },
         "columnDefs": [
-            { "orderable": false, "targets": 4 },
-            { "searchable": false, "targets": 4 }
+            { "orderable": false, "targets": 5 },
+            { "searchable": false, "targets": 5 }
         ],
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: "title" },
             { data: "companyName" },
             { data: "description" },
