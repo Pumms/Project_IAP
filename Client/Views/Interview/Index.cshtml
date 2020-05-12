@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewData["Title"] = "Interview";
+    Layout = "~/Views/Layouts/Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active">@ViewData["Title"]</li>
+            </ol>
+        </div>
+    </div>
+    @* star card *@
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h2>Interview</h2>
+                        </div>
+                        <div>
+                            <button class="btn pull-right hidden-sm-down btn-success" id="BtnAdd" data-toggle="modal" data-target="#myModal"><i class="mdi mdi-plus-circle"></i> Add Interview</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive m-t-40">
+                        <table id="Interview" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Title</th>
+                                    <th>Company Name</th>
+                                    <th>Description</th>
+                                    <th>Interview Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal content-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Interview</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Title">Title :</label>
+                        <input class="form-control" id="Title" placeholder="Title">
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="CompanyOption">Company Name :</label>
+                            <select class="form-control" id="CompanyOption"></select>
+                        </div>
+
+                        <div class="col">
+                            <label for="Division">Division :</label>
+                            <input class="form-control" id="Division" placeholder="Division">
+                        </div>
+
+                        <div class="col">
+                            <label for="JobDesk">Job Desk :</label>
+                            <input class="form-control" id="JobDesk" placeholder="Job Desk">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mb-3">
+                        <div class="col">
+                            <label for="Gender">Gender :</label>
+                            <select class="form-control" id="Gender">
+                                <option value="selected" selected>Select Option</option>
+                                <option>Laki-Laki</option>
+                                <option>Perempuan</option>
+                                <option>Laki-Laki & Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="Experience">Work Experience :</label>
+                            <select class="form-control" id="Experience">
+                                <option value="selected" selected>Select Option</option>
+                                <option value="<1 Year">< 1 Year</option>
+                                <option value="1 Year">1 Year</option>
+                                <option value="2 Year">2 Year</option>
+                                <option value=">3 Year">> 3 Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Education">Last Education :</label>
+                                <select class="form-control" id="LastEducation">
+                                    <option value="selected" selected>Select Option</option>
+                                    <option>SMA</option>
+                                    <option>D3</option>
+                                    <option>S1</option>
+                                    <option>S2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="InterviewDate">Interview Date :</label>
+                                <input type="date" class="form-control" id="InterviewDate">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Address">Address :</label>
+                                <textarea class="form-control" id="Address" placeholder="Address" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Description">Description :</label>
+                                <textarea class="form-control" id="Description" placeholder="Description" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="AddressInterview">Address Interview :</label>
+                        <textarea class="form-control" id="AddressInterview" placeholder="e.g. Location, Floor, Interviewer" rows="3"></textarea>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" class="form-control" id="Id">
+                <button id="UpdateBtn" type="button" onclick="Edit()" class="btn btn-success">Update</button>
+                <button id="SaveBtn" type="button" onclick="Save()" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Script/Interview.js"></script>
+}
