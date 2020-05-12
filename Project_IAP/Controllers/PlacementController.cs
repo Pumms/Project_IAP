@@ -16,11 +16,13 @@ namespace Project_IAP.Controllers
     public class PlacementController : BaseController<Placement, PlacementRepository>
     {
         private readonly PlacementRepository _placementRepository;
+        private readonly UserRepository _userRepository;
         private readonly UserInterviewRepository _userinterviewRepository;
-        public PlacementController(PlacementRepository placementRepository, UserInterviewRepository userinterviewRepository) : base(placementRepository)
+        public PlacementController(PlacementRepository placementRepository, UserInterviewRepository userinterviewRepository, UserRepository userRepository) : base(placementRepository)
         {
             this._placementRepository = placementRepository;
             this._userinterviewRepository = userinterviewRepository;
+            this._userRepository = userRepository;
         }
 
         //Data History Admin
@@ -71,7 +73,8 @@ namespace Project_IAP.Controllers
         public async Task<ActionResult<PlacementVM>> CancelPlacement(PlacementVM entity)
         {
             var cancel = await _userinterviewRepository.StatusTrue(entity.Id);
-            
+            await _userRepository.WorkStatusFalse(entity.UserId);
+
             if (cancel != null)
             {
                 SendEmail(entity, "cancel");
