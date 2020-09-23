@@ -14,6 +14,7 @@ namespace Project_IAP.Context
         public DbSet<User> user { get; set; }
         public DbSet<Company> company { get; set; }
         public DbSet<Interview> interview { get; set; }
+        public DbSet<UserInterview> userinterview { get; set; }
         public DbSet<Placement> placement { get; set; }
         public DbSet<Replacement> replacement { get; set; }
     }

@@ -56,13 +56,14 @@ namespace Client.Controllers
             }
             return Json(interview);
         }
+
         public JsonResult InsertOrUpdate(Interview interview)
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
             var myContent = JsonConvert.SerializeObject(interview);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
             if (interview.Id.Equals(0))
             {
                 var result = client.PostAsync("Interview/", byteContent).Result;
@@ -76,7 +77,6 @@ namespace Client.Controllers
         }
         public JsonResult GetById(int Id)
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
             Interview interview = null;
             var responseTask = client.GetAsync("Interview/" + Id);
             responseTask.Wait();
@@ -95,8 +95,91 @@ namespace Client.Controllers
 
         public JsonResult Delete(int Id)
         {
-            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
             var result = client.DeleteAsync("Interview/" + Id).Result;
+            return Json(result);
+        }
+
+        public JsonResult AssignEmployee(UserInterview model)
+        {
+            var myContent = JsonConvert.SerializeObject(model);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = client.PostAsync("UserInterview/AssignEmployee", byteContent).Result;
+            return Json(result);
+        }
+
+        public JsonResult LoadEmpInterview()
+        {
+            IEnumerable<InterviewVM> placement = null;
+            var responseTask = client.GetAsync("UserInterview/DataInterview");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<InterviewVM>>();
+                readTask.Wait();
+                placement = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(placement);
+        }
+
+        public JsonResult LoadHistory()
+        {
+            IEnumerable<InterviewVM> placement = null;
+            var responseTask = client.GetAsync("UserInterview/DataHistory");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<InterviewVM>>();
+                readTask.Wait();
+                placement = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(placement);
+        }
+
+        public JsonResult GetDataSendEmail(int id)
+        {
+            IEnumerable<InterviewVM> placement = null;
+            var responseTask = client.GetAsync("UserInterview/GetDataSendEmail/" + id);
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<InterviewVM>>();
+                readTask.Wait();
+                placement = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server error, try after some time");
+            }
+            return Json(placement);
+        }
+
+        public JsonResult ConfirmInterview(InterviewVM model)
+        {
+            var myContent = JsonConvert.SerializeObject(model);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = client.PutAsync("UserInterview/ConfirmInterview/" + model.Id, byteContent).Result;
+            return Json(result);
+        }
+        public JsonResult DeleteUserInterview(int id)
+        {
+            var result = client.DeleteAsync("UserInterview/" + id).Result;
             return Json(result);
         }
     }

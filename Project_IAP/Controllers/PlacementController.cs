@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +16,22 @@ namespace Project_IAP.Controllers
     public class PlacementController : BaseController<Placement, PlacementRepository>
     {
         private readonly PlacementRepository _placementRepository;
-        public PlacementController(PlacementRepository placementRepository) : base(placementRepository)
+        private readonly UserRepository _userRepository;
+        private readonly UserInterviewRepository _userinterviewRepository;
+        public PlacementController(PlacementRepository placementRepository, UserInterviewRepository userinterviewRepository, UserRepository userRepository) : base(placementRepository)
         {
             this._placementRepository = placementRepository;
+            this._userinterviewRepository = userinterviewRepository;
+            this._userRepository = userRepository;
         }
 
-        //For List Data Placement
+        //Data History Admin
+        [HttpGet]
+        [Route("DataPlacement")]
+        public async Task<IEnumerable<InterviewVM>> DataPlacement()
+        {
+            return await _placementRepository.DataPlacement();
+        }
         [HttpGet]
         [Route("DataHistory")]
         public async Task<IEnumerable<PlacementVM>> DataHistory()
@@ -30,6 +39,15 @@ namespace Project_IAP.Controllers
             return await _placementRepository.DataHistory();
         }
 
+
+        //Data Placement User
+        [HttpGet]
+        [Route("DataUserPlacement/{id}")]
+        public async Task<IEnumerable<PlacementVM>> DataUserPlacement(int id)
+        {
+            return await _placementRepository.DataUserPlacement(id);
+        }
+        //Data History User
         [HttpGet]
         [Route("DataUserHistory/{id}")]
         public async Task<IEnumerable<PlacementVM>> DataUserHistory(int id)
@@ -37,95 +55,42 @@ namespace Project_IAP.Controllers
             return await _placementRepository.DataUserHistory(id);
         }
 
-        [HttpGet]
-        [Route("DataUserPlacement/{id}")]
-        public async Task<IEnumerable<PlacementVM>> DataUserPlacement(int id)
-        {
-            return await _placementRepository.DataUserPlacement(id);
-        }
-
-        [HttpGet]
-        [Route("DataInterview")]
-        public async Task<IEnumerable<PlacementVM>> DataInterview()
-        {
-            return await _placementRepository.DataInterview();
-        }
-
-        [HttpGet]
-        [Route("DataPlacement")]
-        public async Task<IEnumerable<PlacementVM>> DataPlacement()
-        {
-            return await _placementRepository.DataPlacement();
-        }
-
-        [HttpGet]
-        [Route("GetByStatus/{id}")]
-        public async Task<IEnumerable<PlacementVM>> GetByStatus(int id)
-        {
-            return await _placementRepository.GetByStatus(id);
-        }
-        //End For List Data Placement
-
         [HttpPost]
-        [Route("AssignEmployee")]
-        public async Task<ActionResult<Placement>> AssignEmployee(Placement placement)
+        [Route("ConfirmPlacement")]
+        public async Task<ActionResult<PlacementVM>> ConfirmPlacement(PlacementVM entity)
         {
-            await _placementRepository.AssignEmployee(placement);
-            return Ok("Assign Success");
-        }
-
-        [HttpPut]
-        [Route("CancelPlacement/{id}")]
-        public async Task<ActionResult<Placement>> CancelPlacement(int id, PlacementVM entity)
-        {
-            if (id != entity.Id)
-            {
-                return BadRequest();
-            }
-            var confirm = await _placementRepository.CancelPlacement(entity.Id);
-            await _placementRepository.SetWorkStatus(0, entity.UserId);
-            if (confirm != null)
-            {
-                SendEmail(entity, "cancel");
-            }
-            return Ok("Canceled success");
-        }
-
-        [HttpPut]
-        [Route("ConfirmInterview/{id}")]
-        public async Task<ActionResult<Placement>> ConfirmInterview(int id, PlacementVM entity)
-        {
-            if (id != entity.Id)
-            {
-                return BadRequest();
-            }
-
-            var confirm = await _placementRepository.ConfirmInterview(entity.Id);
-            await _placementRepository.SetWorkStatus(1, entity.UserId);
-
-            if (confirm != null)
-            {
-                SendEmail(entity, "interview");
-            }
-            return Ok("Confirmation Interview Success");
-        }
-
-        [HttpPut]
-        [Route("ConfirmPlacement/{id}")]
-        public async Task<ActionResult<Placement>> ConfirmPlacement(int id, PlacementVM entity)
-        {
-            if (id != entity.Id)
-            {
-                return BadRequest();
-            }
-
-            var confirm = await _placementRepository.ConfirmPlacement(entity.Id, entity);
+            await _userinterviewRepository.StatusTrue(entity.Id);
+            var confirm = await _placementRepository.ConfirmPlacement(entity);
 
             if (confirm != null)
             {
                 SendEmail(entity, "placement");
             }
             return Ok("Confirmation Placement success");
+        }
+        [HttpPut]
+        [Route("CancelPlacement")]
+        public async Task<ActionResult<PlacementVM>> CancelPlacement(PlacementVM entity)
+        {
+            var cancel = await _userinterviewRepository.StatusTrue(entity.Id);
+            await _userRepository.WorkStatusFalse(entity.UserId);
+
+            if (cancel != null)
+            {
+                SendEmail(entity, "cancel");
+            }
+            return Ok("Canceled success");
+        }
+
+        //Fungsi OffSite
+        [HttpPut]
+        [Route("ClearPlacement")]
+        public async Task<ActionResult<PlacementVM>> ClearPlacement(PlacementVM entity)
+        {
+            await _userRepository.WorkStatusFalse(entity.UserId);
+            await _placementRepository.ClearPlacement(entity.Id);
+
+            return Ok();
         }
 
         public IActionResult SendEmail(PlacementVM placement, string status)
@@ -134,7 +99,7 @@ namespace Project_IAP.Controllers
             //Pengirim Email, parameter : Nama Pengirim, Email Pengirim
             message.From.Add(new MailboxAddress("Admin", "web.tester1998@gmail.com"));
             //Penerima Email, parameter : Nama Penerima, Email Penerima
-            message.To.Add(new MailboxAddress(placement.FullName, placement.Email));
+            message.To.Add(new MailboxAddress(placement.FullName, placement.EmailUser));
 
             var date = DateTime.Now.ToShortDateString();
             var interviewdate = placement.InterviewDate.ToShortDateString();
@@ -146,7 +111,7 @@ namespace Project_IAP.Controllers
                 message.Body = new TextPart("html")
                 {
                     Text = "Dear " + placement.FullName + ",<br>" +
-                   "Your Interview has been Confirmed, here your Data Contract : <br>" +
+                   "Congratulations! You passed the interview, here your Data Contract : <br>" +
                    "Start Contract : " + placement.StartContract.ToShortDateString() + "<br>" +
                    "End Contract : " + placement.EndContract.ToShortDateString() + "<br><br>" +
                    "Best Regards <br>" +
@@ -160,23 +125,9 @@ namespace Project_IAP.Controllers
                 message.Body = new TextPart("html")
                 {
                     Text = "Dear " + placement.FullName + ",<br>" +
-                   "Sorry, your Apply has been Canceled, try again in another Interview and Good luck! <br><br>" +
+                   "Sorry, You did not pass this interview, try again in another Interview, Good luck!. <br><br>" +
                    "Best Regards <br>" +
                    "Admin"
-                };
-            }
-            if (status == "interview")
-            {
-                //Subject
-                message.Subject = "Confirmation Interview " + date;
-                message.Body = new TextPart("html")
-                {
-                    Text = "Dear " + placement.FullName + ",<br>" +
-                "Your Apply has been Confirmed, here Address for Interview : <br>" +
-                "Date Interview :" + interviewdate + "<br>" +
-                placement.AddressInterview + "<br>" +
-                "Best Regards <br>" +
-                "Admin"
                 };
             }
 

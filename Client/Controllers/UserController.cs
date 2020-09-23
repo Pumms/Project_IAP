@@ -57,6 +57,25 @@ namespace Client.Controllers
             }
         }
 
+        public JsonResult LoadEmployee()
+        {
+            IEnumerable<User> user = null;
+            var responseTask = client.GetAsync("User/GetAll");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<User>>();
+                readTask.Wait();
+                user = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(user);
+        }
+
         public JsonResult LoadUserHistory()
         {
             int id = int.Parse(HttpContext.Session.GetString("Id")); //session id user yang login

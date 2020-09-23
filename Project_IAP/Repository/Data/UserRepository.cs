@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Project_IAP.Context;
 using Project_IAP.Models;
@@ -13,9 +14,11 @@ namespace Project_IAP.Repository.Data
 {
     public class UserRepository : GeneralRepository<User, MyContext>
     {
+        private readonly MyContext _myContext;
         IConfiguration _configuration { get; }
         public UserRepository(MyContext mycontexts, IConfiguration configuration) : base(mycontexts)
         {
+            _myContext = mycontexts;
             _configuration = configuration;
         }
 
@@ -27,6 +30,32 @@ namespace Project_IAP.Repository.Data
                 var data = await connection.QueryAsync<User>(spName, commandType: CommandType.StoredProcedure);
                 return data;
             }
+        }
+
+        public async Task<User> WorkStatusTrue(int id)
+        {
+            var entity = await Get(id);
+            if (id != entity.Id)
+            {
+                return entity;
+            }
+            entity.WorkStatus = true;
+            _myContext.Entry(entity).State = EntityState.Modified;
+            await _myContext.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task<User> WorkStatusFalse(int id)
+        {
+            var entity = await Get(id);
+            if (id != entity.Id)
+            {
+                return entity;
+            }
+            entity.WorkStatus = false;
+            _myContext.Entry(entity).State = EntityState.Modified;
+            await _myContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

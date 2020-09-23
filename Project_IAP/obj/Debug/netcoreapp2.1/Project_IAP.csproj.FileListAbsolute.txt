@@ -1,21 +1,3 @@
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.Development.json
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.json
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.deps.json
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimeconfig.json
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimeconfig.dev.json
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.dll
-D:\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.pdb
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csprojAssemblyReference.cache
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csproj.CoreCompileInputs.cache
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cache
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cs
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.AssemblyInfoInputs.cache
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.AssemblyInfo.cs
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorTargetAssemblyInfo.cache
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.dll
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.pdb
-D:\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.genruntimeconfig.cache
 D:\VisualBC\Project_IAP Backup\FIX\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.Development.json
 D:\VisualBC\Project_IAP Backup\FIX\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.json
 D:\VisualBC\Project_IAP Backup\FIX\Project_IAP\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
@@ -51,3 +33,21 @@ D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorTar
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.dll
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.pdb
 D:\VisualBC\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.genruntimeconfig.cache
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.Development.json
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\appsettings.json
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.deps.json
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimeconfig.json
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.runtimeconfig.dev.json
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.dll
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\bin\Debug\netcoreapp2.1\Project_IAP.pdb
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.AssemblyInfoInputs.cache
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.AssemblyInfo.cs
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csproj.CoreCompileInputs.cache
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cache
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorAssemblyInfo.cs
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.RazorTargetAssemblyInfo.cache
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.dll
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.pdb
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.genruntimeconfig.cache
+D:\Projek Visual Studio\Tugas Akhir\Project_IAP\Project_IAP\obj\Debug\netcoreapp2.1\Project_IAP.csprojAssemblyReference.cache

@@ -36,6 +36,24 @@ namespace Client.Controllers
             }
         }
 
+       public JsonResult LoadPlacement()
+        {
+            IEnumerable<InterviewVM> placement = null;
+            var responseTask = client.GetAsync("Placement/DataPlacement");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<InterviewVM>>();
+                readTask.Wait();
+                placement = readTask.Result;
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Server Error");
+            }
+            return Json(placement);
+        }
         public JsonResult LoadHistory()
         {
             IEnumerable<PlacementVM> placement = null;
@@ -54,85 +72,6 @@ namespace Client.Controllers
             }
             return Json(placement);
         }
-        
-        public JsonResult LoadEmployee()
-        {
-            IEnumerable<User> user = null;
-            var responseTask = client.GetAsync("User/GetAll");
-            responseTask.Wait();
-            var result = responseTask.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var readTask = result.Content.ReadAsAsync<IList<User>>();
-                readTask.Wait();
-                user = readTask.Result;
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
-            return Json(user);
-        }
-
-        public JsonResult LoadEmpInterview()
-        {
-            IEnumerable<PlacementVM> placement = null;
-            var responseTask = client.GetAsync("Placement/DataInterview");
-            responseTask.Wait();
-            var result = responseTask.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var readTask = result.Content.ReadAsAsync<IList<PlacementVM>>();
-                readTask.Wait();
-                placement = readTask.Result;
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
-            return Json(placement);
-        }
-
-        public JsonResult LoadEmpPlacement()
-        {
-            IEnumerable<PlacementVM> placement = null;
-            var responseTask = client.GetAsync("Placement/DataPlacement");
-            responseTask.Wait();
-            var result = responseTask.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var readTask = result.Content.ReadAsAsync<IList<PlacementVM>>();
-                readTask.Wait();
-                placement = readTask.Result;
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Server Error");
-            }
-            return Json(placement);
-        }
-
-        public JsonResult AssignEmployee(Placement placement)
-        {
-            var myContent = JsonConvert.SerializeObject(placement);
-            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-            var byteContent = new ByteArrayContent(buffer);
-            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            var result = client.PostAsync("Placement/AssignEmployee", byteContent).Result;
-            return Json(result);
-        }
-
-        public JsonResult ConfirmInterview(PlacementVM placement)
-        {
-            var myContent = JsonConvert.SerializeObject(placement);
-            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-            var byteContent = new ByteArrayContent(buffer);
-            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            var result = client.PutAsync("Placement/ConfirmInterview/" + placement.Id, byteContent).Result;
-            return Json(result);
-        }
 
         public JsonResult ConfirmPlacement(PlacementVM placement)
         {
@@ -141,7 +80,7 @@ namespace Client.Controllers
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var result = client.PutAsync("Placement/ConfirmPlacement/" + placement.Id, byteContent).Result;
+            var result = client.PostAsync("Placement/ConfirmPlacement", byteContent).Result;
             return Json(result);
         }
 
@@ -152,21 +91,21 @@ namespace Client.Controllers
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var result = client.PutAsync("Placement/CancelPlacement/" + placement.Id, byteContent).Result;
+            var result = client.PutAsync("Placement/CancelPlacement", byteContent).Result;
             return Json(result);
         }
 
-        public JsonResult GetByStatus(int id)
+        //Fungsi OffSite
+        public JsonResult GetDataPlacement(int id)
         {
-            IEnumerable<PlacementVM> placement = null;
-            var responseTask = client.GetAsync("Placement/GetByStatus/" + id);
+            Placement placement = null;
+            var responseTask = client.GetAsync("Placement/" + id);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IList<PlacementVM>>();
-                readTask.Wait();
-                placement = readTask.Result;
+                var json = JsonConvert.DeserializeObject(result.Content.ReadAsStringAsync().Result).ToString();
+                placement = JsonConvert.DeserializeObject<Placement>(json);
             }
             else
             {
@@ -174,9 +113,15 @@ namespace Client.Controllers
             }
             return Json(placement);
         }
-        public JsonResult Delete(int id)
+
+        public JsonResult ClearPlacement(PlacementVM placement)
         {
-            var result = client.DeleteAsync("Placement/" + id).Result;
+            var myContent = JsonConvert.SerializeObject(placement);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = client.PutAsync("Placement/ClearPlacement", byteContent).Result;
             return Json(result);
         }
     }

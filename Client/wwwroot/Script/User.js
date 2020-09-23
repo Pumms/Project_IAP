@@ -16,8 +16,7 @@ $(document).ready(function () {
                 }
             },
             { data: "companyName" },
-            { data: "title" },
-            { data: "address" },
+            { data: "addressInterview" },
             {
                 data: "interviewDate", render: function (data) {
                     return moment(data).format('DD/MM/YYYY');
@@ -46,20 +45,13 @@ $(document).ready(function () {
                 }
             },
             { data: "companyName" },
-            { data: "title" },
-            { data: "address" },
-            {
-                data: "interviewDate", render: function (data) {
-                    return moment(data).format('DD/MM/YYYY');
-                }
-            },
             {
                 data: "status", render: function (data) {
-                    if (data == 2) {
-                        return "<span class='badge badge-pill badge-success'>Done</span>";
+                    if (data == 1) {
+                        return "<span class='badge badge-pill badge-success'>On Site</span>";
                     }
-                    else if (data == 3) {
-                        return "<span class='badge badge-pill badge-danger'>Cancel</span>";
+                    else if (data == 0) {
+                        return "<span class='badge badge-pill badge-danger'>Off Site</span>";
                     }
 
                 }
@@ -105,7 +97,7 @@ $(document).ready(function () {
             },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><div class='btn-group'><button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
+                    return "<td><div class='btn-group'><button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil-alt'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
                 }
             },
         ]
@@ -237,27 +229,36 @@ function Save() {
     Replacement.replacementReason = $('#ReplacementReason').val();
     Replacement.detail = $('#Detail').val();
     Replacement.replacementDate = $('#ReplacementDate').val();
-    $.ajax({
-        type: 'POST',
-        url: '/Replacement/InsertOrUpdate',
-        data: Replacement
-    }).then((result) => {
-        if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
-            Swal.fire({
-                icon: 'success',
-                potition: 'center',
-                title: 'Replacement Add Successfully',
-                timer: 2500
-            }).then(function () {
-                table.ajax.reload();
-                $('#myModal').modal('hide');
-                clearscreen();
-            });
-        }
-        else {
-            Swal.fire('Error', 'Failed to Input', 'error');
-        }
-    })
+    if ($('#EmployeeOption').val() == "0" || $('#ReplacementReason').val() == "" || $('#Detail').val() == "" || $('#ReplacementDate').val() == "") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Input Cannot be Empty',
+        })
+        return false;
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: '/Replacement/InsertOrUpdate',
+            data: Replacement
+        }).then((result) => {
+            if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
+                Swal.fire({
+                    icon: 'success',
+                    potition: 'center',
+                    title: 'Replacement Add Successfully',
+                    timer: 2500
+                }).then(function () {
+                    table.ajax.reload();
+                    $('#myModal').modal('hide');
+                    clearscreen();
+                });
+            }
+            else {
+                Swal.fire('Error', 'Failed to Input', 'error');
+            }
+        })
+    }
 } //function save
 /*--------------------------------------------------------------------------------------------------*/
 function Edit() {
@@ -273,27 +274,36 @@ function Edit() {
     Replacement.replacementReason = $('#ReplacementReason').val();
     Replacement.detail = $('#Detail').val();
     Replacement.replacementDate = $('#ReplacementDate').val();
-    $.ajax({
-        type: 'POST',
-        url: '/Replacement/InsertOrUpdate',
-        data: Replacement
-    }).then((result) => {
-        debugger;
-        if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
-            Swal.fire({
-                icon: 'success',
-                potition: 'center',
-                title: 'Replacement Update Successfully',
-                timer: 2500
-            }).then(function () {
-                table.ajax.reload();
-                $('#myModal').modal('hide');
-                clearscreen();
-            });
-        } else {
-            Swal.fire('Error', 'Failed to Edit', 'error');
-        }
-    })
+    if ($('#EmployeeOption').val() == "0" || $('#ReplacementReason').val() == "" || $('#Detail').val() == "" || $('#ReplacementDate').val() == "") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Input Cannot be Empty',
+        })
+        return false;
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: '/Replacement/InsertOrUpdate',
+            data: Replacement
+        }).then((result) => {
+            debugger;
+            if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
+                Swal.fire({
+                    icon: 'success',
+                    potition: 'center',
+                    title: 'Replacement Update Successfully',
+                    timer: 2500
+                }).then(function () {
+                    table.ajax.reload();
+                    $('#myModal').modal('hide');
+                    clearscreen();
+                });
+            } else {
+                Swal.fire('Error', 'Failed to Edit', 'error');
+            }
+        })
+    }
 }//function edit
 /*--------------------------------------------------------------------------------------------------*/
 function Delete(Id) {

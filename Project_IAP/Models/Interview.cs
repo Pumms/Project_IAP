@@ -16,11 +16,8 @@ namespace Project_IAP.Models
         public string Division { get; set; }
         public string JobDesk { get; set; }
         public DateTime InterviewDate { get; set; }
-        public string Address { get; set; }
-        public string Gender { get; set; }
-        public string Experience { get; set; }
-        public string LastEducation { get; set; }
-        public string Description { get; set; }
         public string AddressInterview { get; set; }
+        public string Interviewer { get; set; }
+        public string EmailInterviewer { get; set; }
     }
 }

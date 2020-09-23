@@ -177,7 +177,7 @@ function Save() {
         if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
             Swal.fire({
                 icon: 'success',
-                potition: 'center',
+                position: 'center',
                 title: 'Replacement Add Successfully',
                 timer: 2500
             }).then(function () {
@@ -213,7 +213,7 @@ function Edit() {
         if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
             Swal.fire({
                 icon: 'success',
-                potition: 'center',
+                position: 'center',
                 title: 'Replacement Update Successfully',
                 timer: 2500
             }).then(function () {
@@ -365,7 +365,7 @@ function ConfirmReplacement() {
                 if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
                     Swal.fire({
                         icon: 'success',
-                        potition: 'center',
+                        position: 'center',
                         title: 'Replacement has been Accepted',
                         timer: 2500
                     }).then(function () {
@@ -423,7 +423,7 @@ function CancelReplacement() {
                 if (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 204) {
                     Swal.fire({
                         icon: 'success',
-                        potition: 'center',
+                        position: 'center',
                         title: 'Replacement has been Rejected',
                         timer: 2500
                     }).then(function () {

@@ -12,7 +12,6 @@ namespace Project_IAP.Repository.Interface
         Task<T> Get(int id);
         Task<T> Post(T entity);
         Task<T> Put(T entity);
-        //Task<T> Put(int Id);
         Task<T> Delete(int id);
     }
 }

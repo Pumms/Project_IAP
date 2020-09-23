@@ -14,16 +14,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="~/Mini AdminPro/assets/images/favicon.png">
+    @*<link rel="icon" type="image/png" sizes="16x16" href="~/Mini AdminPro/assets/images/favicon.png">*@
     <title>@ViewData["Title"]</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Mini AdminPro/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="~/Mini AdminPro/main/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="~/Mini AdminPro/main/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="~/Mini AdminPro/main/css/colors/purple.css" id="theme" rel="stylesheet">
     <link href="~/Mini AdminPro/assets/plugins/jqueryui/jquery-ui.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,21 +55,15 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="#">
                         <!-- Logo icon --><b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!--You can put here icon as well //  //-->
                             <!-- Dark Logo icon -->
-                            <img src="~/Mini AdminPro/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                              <i class="fas fa-city mr-2"></i>
                             <!-- Light Logo icon -->
-                            <img src="~/Mini AdminPro/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
-                        <!-- Logo text --><span>
-                            <!-- dark Logo text -->
-                            <img src="~/Mini AdminPro/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo text -->
-                            <img src="~/Mini AdminPro/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
-                        </span>
+                        <span class="font-weight-normal">Application IAP</span>
                     </a>
                 </div>
                 <!-- ============================================================== -->
@@ -338,9 +333,8 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap">PERSONAL</li>
                         <li id="panel1">
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-dashboard"></i><span class="hide-menu">Dashboard </span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="hide-menu">Select Menu </span></a>
                             <ul aria-expanded="false" class="collapse" >
                                 <li>@Html.ActionLink("Company", "Index", "Company")</li>
                                 <li>@Html.ActionLink("Interview", "Index", "Interview")</li>
@@ -349,7 +343,7 @@
                             </ul>
                         </li>
                         <li id="panel2">
-                            <a class="has-arrow mt-2" href="#" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Main Menu</span></a>
+                            <a class="has-arrow mt-2" href="#" aria-expanded="false"><span class="hide-menu">Select Menu</span></a>
                             <ul aria-expanded="false" class="collapse" >
                                 <li>@Html.ActionLink("Placement", "Index", "User")</li>
                                 <li>@Html.ActionLink("Replacement", "Replacement", "User")</li>
@@ -360,7 +354,7 @@
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
-            <div class="sidebar-footer d-flex justify-content-end">
+            <div class="sidebar-footer">
                 <!-- item-->
                 @*<a href="" class="link" data-toggle="tooltip" title="" data-original-title="Settings"><i class="ti-settings"></i></a>*@
 

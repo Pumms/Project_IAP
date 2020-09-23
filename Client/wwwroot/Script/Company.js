@@ -25,7 +25,13 @@
             { data: "email" },
             {
                 data: null, render: function (data, type, row) {
-                    return "<td><div class='btn-group'><button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-original-title='Edit' onclick=GetById('" + row.id + "');><i class='fa fa-pencil'></i></button> <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' data-original-title='Delete' onclick=Delete('" + row.id + "');><i class='fa fa-trash'></i></button></div></td>";
+                    return `<td>
+                    <div class='btn-group'>
+                        <button type='button' class='btn btn-warning' id='BtnEdit' data-toggle='tooltip' data-original-title='Edit' onclick=GetById('` + row.id + `');><i class='fas fa-pencil-alt'></i></button>
+
+                        <button type='button' class='btn btn-danger' id='BtnDelete' data-toggle='tooltip' data-placement='top' title='Delete' data-original-title='Delete' onclick=Delete('` + row.id + `');><i class='fa fa-trash'></i></button>
+                    </div>
+                    </td>`;
                 }
             },
         ]
@@ -51,7 +57,7 @@ function GetById(id) {
             $('#myModal').modal('show');
             $('#UpdateBtn').show();
             $('#SaveBtn').hide();
-            
+
         },
         error: function (errormessage) {
             alert(errormessage.responsText);
@@ -71,11 +77,11 @@ function Save() {
     Company.Address = $('#Address').val();
     Company.PhoneNumber = $('#PhoneNumber').val();
     Company.Email = $('#Email').val();
-    if ($('#Name').val() == "") {
+    if ($('#Name').val() == "" || $('#Address').val() == "" || $('#PhoneNumber').val() == "" || $('#Email').val() == "") {
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Name Cannot be Empty',
+            text: 'Input Cannot be Empty',
         })
         return false;
     } else {
@@ -87,7 +93,7 @@ function Save() {
             if (result.statusCode == 201) {
                 Swal.fire({
                     icon: 'success',
-                    potition: 'center',
+                    position: 'center',
                     title: 'Company Add Successfully',
                     timer: 2500
                 }).then(function () {
@@ -116,27 +122,37 @@ function Edit() {
     Company.Address = $('#Address').val();
     Company.PhoneNumber = $('#PhoneNumber').val();
     Company.Email = $('#Email').val();
-    $.ajax({
-        type: 'POST',
-        url: '/Company/InsertOrUpdate',
-        data: Company
-    }).then((result) => {
-        debugger;
-        if (result.statusCode == 200) {
-            Swal.fire({
-                icon: 'success',
-                potition: 'center',
-                title: 'Company Update Successfully',
-                timer: 2500
-            }).then(function () {
-                table.ajax.reload();
-                cls();
-                $('#myModal').modal('hide');
-            });
-        } else {
-            Swal.fire('Error', 'Failed to Edit', 'error');
-        }
-    })
+
+    if ($('#Name').val() == "" || $('#Address').val() == "" || $('#PhoneNumber').val() == "" || $('#Email').val() == "") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Input Cannot be Empty',
+        })
+        return false;
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: '/Company/InsertOrUpdate',
+            data: Company
+        }).then((result) => {
+            debugger;
+            if (result.statusCode == 200) {
+                Swal.fire({
+                    icon: 'success',
+                    position: 'center',
+                    title: 'Company Update Successfully',
+                    timer: 2500
+                }).then(function () {
+                    table.ajax.reload();
+                    cls();
+                    $('#myModal').modal('hide');
+                });
+            } else {
+                Swal.fire('Error', 'Failed to Edit', 'error');
+            }
+        })
+    }
 }//function edit
 /*--------------------------------------------------------------------------------------------------*/
 function Delete(Id) {

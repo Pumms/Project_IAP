@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Project_IAP.Context;
@@ -22,32 +21,20 @@ namespace Project_IAP.Repository.Data
             _configuration = configuration;
             _myContext = mycontexts;
         }
-
+        public async Task<IEnumerable<InterviewVM>> DataPlacement()
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_RetrieveforPlacement_TB_T_UserInterview";
+                var data = await connection.QueryAsync<InterviewVM>(spName, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
         public async Task<IEnumerable<PlacementVM>> DataHistory()
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
             {
-                var spName = "SP_RetrieveAll_TB_T_Placement";
-                var data = await connection.QueryAsync<PlacementVM>(spName, commandType: CommandType.StoredProcedure);
-                return data;
-            }
-        }
-
-        public async Task<IEnumerable<PlacementVM>> DataInterview()
-        {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
-            {
-                var spName = "SP_RetrieveEmpInterview_TB_T_Placement";
-                var data = await connection.QueryAsync<PlacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
-                return data;
-            }
-        }
-
-        public async Task<IEnumerable<PlacementVM>> DataPlacement()
-        {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
-            {
-                var spName = "SP_RetrieveEmpPlacement_TB_T_Placement";
+                var spName = "SP_History_TB_M_Placement";
                 var data = await connection.QueryAsync<PlacementVM>(spName, commandType: CommandType.StoredProcedure);
                 return data;
             }
@@ -58,7 +45,7 @@ namespace Project_IAP.Repository.Data
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
             {
-                var spName = "SP_UserHistory_TB_T_Placement";
+                var spName = "SP_UserHistory_TB_M_Placement";
                 parameters.Add("@UserId", id);
                 var data = await connection.QueryAsync<PlacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
                 return data;
@@ -68,46 +55,25 @@ namespace Project_IAP.Repository.Data
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
             {
-                var spName = "SP_UserPlacement_TB_T_Placement";
+                var spName = "SP_UserPlacement_TB_M_Placement";
                 parameters.Add("@UserId", id);
                 var data = await connection.QueryAsync<PlacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
                 return data;
             }
         }
-        //User
 
-        public async Task<Placement> CancelPlacement(int id)
+        public async Task<IEnumerable<PlacementVM>> ConfirmPlacement(PlacementVM model)
         {
-            var entity = await Get(id);
-            if (id != entity.Id)
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
             {
-                return entity;
+                var spName = "SP_Insert_TB_M_Placement";
+                parameters.Add("@UserId", model.UserId);
+                parameters.Add("@CompanyId", model.CompanyId);
+                parameters.Add("@Start", model.StartContract);
+                parameters.Add("@End", model.EndContract);
+                var data = await connection.QueryAsync<PlacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return data;
             }
-            entity.Status = 3;
-            _myContext.Entry(entity).State = EntityState.Modified;
-            await _myContext.SaveChangesAsync();
-            return entity;
-        }
-
-        public async Task<Placement> AssignEmployee(Placement entity)
-        {
-            entity.Status = 0;
-            await _myContext.Set<Placement>().AddAsync(entity);
-            await _myContext.SaveChangesAsync();
-            return entity;
-        }
-
-        public async Task<Placement> ConfirmInterview(int id)
-        {
-            var entity = await Get(id);
-            if (id != entity.Id)
-            {
-                return entity;
-            }
-            entity.Status = 1;
-            _myContext.Entry(entity).State = EntityState.Modified;
-            await _myContext.SaveChangesAsync();
-            return entity;
         }
 
         public async Task<Placement> ConfirmPlacement(int id, PlacementVM input)
@@ -117,35 +83,37 @@ namespace Project_IAP.Repository.Data
             {
                 return entity;
             }
-            entity.Status = 2;
+            entity.Status = true;
             entity.StartContract = input.StartContract;
             entity.EndContract = input.EndContract;
             _myContext.Entry(entity).State = EntityState.Modified;
             await _myContext.SaveChangesAsync();
             return entity;
         }
-
-        public async Task<IEnumerable<PlacementVM>> SetWorkStatus(int id, int userid)
+        public async Task<Placement> CancelPlacement(int id)
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            var entity = await Get(id);
+            if (id != entity.Id)
             {
-                var spName = "SP_SetWorkStatus_TB_M_User";
-                parameters.Add("@Set", id);
-                parameters.Add("@UserId", userid);
-                var data = await connection.QueryAsync<PlacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
-                return data;
+                return entity;
             }
+            entity.Status = false;
+            _myContext.Entry(entity).State = EntityState.Modified;
+            await _myContext.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task<IEnumerable<PlacementVM>> GetByStatus(int id)
+        public async Task<Placement> ClearPlacement(int id)
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            var entity = await Get(id);
+            if (id != entity.Id)
             {
-                var spName = "SP_DataSendEmail_TB_T_Placement";
-                parameters.Add("@Id", id);
-                var data = await connection.QueryAsync<PlacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
-                return data;
+                return entity;
             }
+            entity.Status = false;
+            _myContext.Entry(entity).State = EntityState.Modified;
+            await _myContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

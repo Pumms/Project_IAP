@@ -90,7 +90,7 @@ namespace Project_IAP.Repository.Data
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
             {
-                var spName = "SP_RetreiveEmployee_TB_T_Replacement";
+                var spName = "SP_RetrieveEmployee_TB_T_Replacement";
                 parameters.Add("@Id", id);
                 var data = await connection.QueryAsync<ReplacementVM>(spName, parameters, commandType: CommandType.StoredProcedure);
                 return data;

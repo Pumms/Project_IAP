@@ -36,6 +36,7 @@ namespace Project_IAP
             services.AddScoped<InterviewRepository>();
             services.AddScoped<ReplacementRepository>();
             services.AddScoped<UserRepository>();
+            services.AddScoped<UserInterviewRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,15 +18,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn pull-right hidden-sm-down btn-success" id="BtnAdd" data-toggle="modal" data-target="#ModalAssign"><i class="mdi mdi-plus-circle"></i> Assign Employee</button>
-                    </div>
+
                     <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="interview-tab" data-toggle="tab" href="#interview" role="tab" aria-controls="interview" aria-selected="true"><i class="fa fa-building-o"></i> Interview</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="placemnet-tab" data-toggle="tab" href="#placement" role="tab" aria-controls="placement" aria-selected="false"><i class="fa fa-handshake-o"></i> Placement</a>
+                            <a class="nav-link active" id="placemnet-tab" data-toggle="tab" href="#placement" role="tab" aria-controls="placement" aria-selected="true"><i class="fa fa-handshake-o"></i> Placement</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false"><i class="fa fa-history"></i> History</a>
@@ -34,25 +29,7 @@
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="interview" role="tabpanel" aria-labelledby="interview-tab">
-                            <div class="table-responsive m-t-40">
-                                <table id="Interview" class="table table-bordered table-striped" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Employee Name</th>
-                                            <th>Company Name</th>
-                                            <th>Company Email</th>
-                                            <th>Title Interview</th>
-                                            <th>Interview Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="placement" role="tabpanel" aria-labelledby="placement-tab">
+                        <div class="tab-pane fade show active" id="placement" role="tabpanel" aria-labelledby="placement-tab">
                             <div class="table-responsive m-t-40">
                                 <table id="Placement" class="table table-striped" width="100%">
                                     <thead>
@@ -60,8 +37,7 @@
                                             <th>No</th>
                                             <th>Employee Name</th>
                                             <th>Company Name</th>
-                                            <th>Company Email</th>
-                                            <th>Title Interview</th>
+                                            <th>Interviewer</th>
                                             <th>Interview Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -78,9 +54,8 @@
                                             <th>No</th>
                                             <th>Employee Name</th>
                                             <th>Company Name</th>
-                                            <th>Start Contract</th>
-                                            <th>End Contract</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -113,12 +88,11 @@
                             <input type="date" class="form-control" id="EndContract">
                         </div>
                     </div>
-                    <input type="hidden" id="Id">
-                    <input type="hidden" id="Email">
-                    <input type="hidden" id="FullName">
-                    <input type="hidden" id="InterviewDate">
-                    <input type="hidden" id="Description">
+                    <input type="hidden" id="InterviewId">
                     <input type="hidden" id="UserId">
+                    <input type="hidden" id="FullName">
+                    <input type="hidden" id="Email_User">
+                    <input type="hidden" id="CompanyId">
                 </div>
                 <div class="modal-footer">
                     <button id="SaveBtn" type="button" onclick="ConfirmPlacement()" class="btn btn-success">Save and Confirm</button>
@@ -129,38 +103,6 @@
     </div>
 </div>
 
-<!-- Modal content-->
-<div id="ModalAssign" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Assign Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="SelectEmployee">Employee</label>
-                        <select class="form-control" id="SelectEmployee"></select>
-                    </div>
-                    <div class="form-group">
-                        <label for="SelectInterview">Interview</label>
-                        <select class="form-control" id="SelectInterview"></select>
-                    </div>
-                    <input type="hidden" id="Id">
-                    <input type="hidden" id="Email">
-                    <input type="hidden" id="EmployeeName">
-                    <input type="hidden" id="InterviewDate">
-                    <input type="hidden" id="Description">
-                </div>
-                <div class="modal-footer">
-                    <button id="AssignBtn" type="button" onclick="AssignEmployee()" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 @section scripts{
     <script src="~/Script/Placement.js"></script>
 }
